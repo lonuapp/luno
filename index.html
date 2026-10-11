@@ -19,7 +19,7 @@ button,input,textarea,select{font:inherit;color:inherit}
 button{cursor:pointer;border:0;background:transparent;position:relative;overflow:hidden}
 button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--purple);outline-offset:2px;border-radius:6px}
 ::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-thumb{background:var(--line);border-radius:10px}
-a{color:var(--purple);text-decoration:none}a:hover{text-decoration:underline}
+a{color:var(--purple);text-decoration:none}
 svg{display:block;flex-shrink:0}
 .hidden{display:none!important}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
@@ -28,7 +28,6 @@ svg{display:block;flex-shrink:0}
 @keyframes scaleIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
 @keyframes spin{to{transform:rotate(360deg)}}
-@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 @keyframes heartPop{0%{transform:scale(1)}40%{transform:scale(1.4)}70%{transform:scale(.95)}100%{transform:scale(1)}}
 @keyframes burst{0%{transform:translate(-50%,-50%) scale(.3);opacity:1}100%{transform:translate(-50%,-50%) scale(2.2);opacity:0}}
@@ -37,7 +36,6 @@ svg{display:block;flex-shrink:0}
 @keyframes ripple{to{transform:scale(4);opacity:0}}
 @keyframes bounceIn{0%{transform:scale(.3);opacity:0}50%{transform:scale(1.05)}70%{transform:scale(.95)}100%{transform:scale(1);opacity:1}}
 @keyframes slideUp{from{transform:translateY(100%);opacity:0}to{transform:none;opacity:1}}
-@keyframes storyBar{from{width:0}to{width:100%}}
 
 .boot-screen{position:fixed;inset:0;background:linear-gradient(125deg,#2a1745 0%,var(--purple) 50%,var(--purple2) 100%);background-size:200% 200%;animation:gradient 8s ease infinite;display:grid;place-items:center;z-index:9999;transition:opacity .5s,visibility .5s}
 .boot-screen.hide{opacity:0;visibility:hidden}
@@ -183,34 +181,15 @@ svg{display:block;flex-shrink:0}
 .ci-actions .send{margin-right:auto;background:linear-gradient(110deg,var(--purple),var(--purple2));color:#fff;padding:8px 20px;font-weight:700}
 .ci-actions .send:hover{color:#fff;filter:brightness(1.08)}
 
-.stories{display:flex;gap:14px;overflow-x:auto;padding:4px 2px 12px;scrollbar-width:none;margin-top:8px}
-.stories::-webkit-scrollbar{display:none}
-.story{min-width:76px;text-align:center;border:0;background:transparent;color:var(--muted);font-size:11px;font-weight:600;transition:.25s;cursor:pointer}
-.story:hover{transform:translateY(-3px)}
-.story-ring{width:66px;height:66px;border-radius:50%;padding:3px;margin:0 auto 8px;background:linear-gradient(135deg,#d0b8ff,var(--purple),#ffb9d3);position:relative;transition:.3s}
-.story-ring img{width:100%;height:100%;object-fit:cover;border:3px solid var(--paper);border-radius:50%}
-.story.add .story-ring{background:var(--soft);border:1.5px dashed var(--purple);display:grid;place-items:center;color:var(--purple)}
-.story.add .story-ring svg{width:24px;height:24px}
-.story.has-story .story-ring:after{content:'';position:absolute;bottom:2px;right:2px;width:14px;height:14px;border-radius:50%;background:#22c55e;border:2.5px solid var(--paper);animation:pulse 2s infinite}
-
 .feed{display:grid;gap:18px;margin-top:16px}
 
-.grid-art{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-.art-tile{position:relative;overflow:hidden;border-radius:18px;background:var(--soft);min-height:148px;aspect-ratio:.8;cursor:pointer;border:0;padding:0;text-align:right;color:#fff;transition:all .35s}
-.art-tile:hover{transform:translateY(-5px) scale(1.02);box-shadow:0 16px 38px #30204430;z-index:2}
-.art-tile img{width:100%;height:100%;position:absolute;inset:0;object-fit:cover;transition:transform .6s}
-.art-tile:hover img{transform:scale(1.1)}
-.art-tile:after{content:'';position:absolute;inset:38% 0 0;background:linear-gradient(transparent,#150a26d9)}
-.art-info{position:absolute;z-index:1;bottom:12px;right:12px;left:10px}
-.art-info strong{display:block;font-size:12.5px;font-weight:700}
-.art-info small{font-size:10.5px;color:#e8dff5;margin-top:2px;display:block}
-
-.explore-hero{padding:0;border-radius:24px;overflow:hidden;position:relative;margin-bottom:22px;box-shadow:var(--sh);height:180px}
+.explore-hero{padding:0;border-radius:24px;overflow:hidden;position:relative;margin-bottom:22px;box-shadow:var(--sh);height:200px}
 .explore-hero img{width:100%;height:100%;object-fit:cover}
 .explore-hero:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#2a1745dd,#6d42c7aa)}
-.explore-hero .eh-content{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 26px;color:#fff;z-index:1}
-.explore-hero h2{margin:0 0 8px;font-size:26px;font-weight:800;letter-spacing:-.5px}
-.explore-hero p{margin:0;font-size:13px;opacity:.9;max-width:420px;line-height:1.8}
+.explore-hero .eh-content{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 28px;color:#fff;z-index:1;max-width:60%}
+.explore-hero .eh-eyebrow{font-size:11px;letter-spacing:2px;color:#d9caff;font-weight:700;margin-bottom:6px}
+.explore-hero h2{margin:0 0 10px;font-size:28px;font-weight:800;letter-spacing:-.5px;line-height:1.3}
+.explore-hero p{margin:0;font-size:13px;opacity:.9;line-height:1.8}
 
 .trend-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-bottom:8px}
 .trend-card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:14px;transition:all .25s;cursor:pointer;animation:fadeUp .4s backwards}
@@ -236,6 +215,28 @@ svg{display:block;flex-shrink:0}
 .chip{white-space:nowrap;border:1px solid var(--line);background:var(--paper);color:var(--muted);border-radius:999px;padding:8px 15px;font-size:12px;font-weight:600;transition:all .25s;cursor:pointer}
 .chip:hover{border-color:var(--purple);color:var(--purple)}
 .chip.active{background:linear-gradient(110deg,var(--purple),var(--purple2));border-color:var(--purple);color:#fff;box-shadow:0 6px 16px color-mix(in srgb,var(--purple) 35%,transparent)}
+
+/* PINTEREST-STYLE MASONRY */
+.masonry{column-count:3;column-gap:12px;margin-bottom:8px}
+@media(max-width:1024px){.masonry{column-count:2}}
+@media(max-width:520px){.masonry{column-count:2;column-gap:8px}}
+.pin{break-inside:avoid;margin-bottom:12px;background:var(--paper);border:1px solid var(--line);border-radius:18px;overflow:hidden;cursor:pointer;transition:all .3s;position:relative;animation:fadeUp .4s backwards}
+.pin:hover{transform:translateY(-3px);box-shadow:0 12px 32px #30204420;border-color:color-mix(in srgb,var(--purple) 40%,var(--line))}
+.pin img{width:100%;display:block;transition:transform .5s}
+.pin:hover img{transform:scale(1.05)}
+.pin-overlay{position:absolute;top:0;left:0;right:0;padding:10px;display:flex;justify-content:flex-end;gap:6px;opacity:0;transition:.25s;background:linear-gradient(#00000060,transparent)}
+.pin:hover .pin-overlay{opacity:1}
+.pin-overlay button{width:34px;height:34px;border-radius:50%;background:#ffffffef;color:var(--ink);display:grid;place-items:center;backdrop-filter:blur(8px);transition:.2s}
+.pin-overlay button:hover{transform:scale(1.1);background:#fff}
+.pin-overlay button.saved{background:var(--purple);color:#fff}
+.pin-overlay svg{width:16px;height:16px}
+.pin-info{padding:12px 14px}
+.pin-info strong{display:block;font-size:12.5px;font-weight:700;margin-bottom:4px;line-height:1.5}
+.pin-info small{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted)}
+.pin-info small img{width:20px;height:20px;border-radius:50%}
+.pin-stats{display:flex;gap:10px;margin-top:8px;font-size:10.5px;color:var(--muted)}
+.pin-stats span{display:inline-flex;align-items:center;gap:3px}
+.pin-stats svg{width:12px;height:12px}
 
 .people-list,.notif-list{display:grid;gap:10px}
 .person-row,.notif{display:flex;align-items:center;gap:12px;padding:14px;background:var(--paper);border:1px solid var(--line);border-radius:16px;transition:all .25s}
@@ -297,7 +298,6 @@ svg{display:block;flex-shrink:0}
 .right-card{margin-bottom:16px}
 .right-card h3{font-size:13.5px;margin:0 0 14px;font-weight:800}
 .right-footer{font-size:10.5px;color:var(--muted);line-height:2;padding:0 8px}
-.right-user{display:flex;align-items:center;gap:10px;margin:12px 0}
 
 .modal-backdrop{position:fixed;inset:0;background:#0a0612cc;z-index:80;display:none;align-items:center;justify-content:center;padding:18px;backdrop-filter:blur(8px)}
 .modal-backdrop.open{display:flex;animation:fadeIn .25s}
@@ -315,7 +315,7 @@ svg{display:block;flex-shrink:0}
 .field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--purple);box-shadow:0 0 0 4px color-mix(in srgb,var(--purple) 12%,transparent)}
 .field textarea{min-height:80px;resize:vertical;line-height:1.9}
 .modal-actions{display:flex;justify-content:flex-start;gap:10px;margin-top:18px;flex-wrap:wrap}
-.primary{border:0;background:linear-gradient(110deg,var(--purple),var(--purple2));color:#fff;padding:12px 20px;border-radius:12px;font-weight:700;font-size:13px;transition:all .2s;box-shadow:0 6px 16px color-mix(in srgb,var(--purple) 30%,transparent)}
+.primary{border:0;background:linear-gradient(110deg,var(--purple),var(--purple2));color:#fff;padding:12px 20px;border-radius:12px;font-weight:700;font-size:13px;transition:all .2s}
 .primary:hover{filter:brightness(1.08);transform:translateY(-2px)}
 .primary:disabled{opacity:.5;cursor:not-allowed;transform:none}
 .secondary{border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:12px 20px;border-radius:12px;font-weight:600;font-size:13px;transition:.2s}
@@ -386,7 +386,6 @@ svg{display:block;flex-shrink:0}
 .comment-box button{background:linear-gradient(110deg,var(--purple),var(--purple2));color:#fff;border-radius:11px;padding:11px 16px;font-weight:700;font-size:12.5px}
 .comment-reply-info{font-size:11px;color:var(--purple);background:var(--accent-soft);padding:6px 12px;border-radius:8px;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;width:100%}
 .comment-reply-info button{color:var(--muted);font-size:16px;padding:0 4px;transition:.2s}
-.comment-reply-info button:hover{transform:rotate(90deg)}
 
 .toast{position:fixed;z-index:130;bottom:26px;left:50%;transform:translate(-50%,20px);background:#25183a;color:#fff;padding:13px 20px;border-radius:14px;font-size:12.5px;opacity:0;pointer-events:none;transition:all .3s;box-shadow:0 10px 40px #0006;max-width:88vw;text-align:center;font-weight:600;display:flex;align-items:center;gap:8px}
 .toast.show{opacity:1;transform:translate(-50%,0)}
@@ -412,12 +411,6 @@ svg{display:block;flex-shrink:0}
 .offline-banner{position:fixed;top:0;left:0;right:0;background:linear-gradient(110deg,var(--warn),#f59e0b);color:#fff;padding:10px;text-align:center;font-size:12.5px;font-weight:700;z-index:110;display:none}
 .offline-banner.show{display:block}
 
-.gallery-stat{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
-.gallery-stat .gs-card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px;text-align:center;transition:all .25s}
-.gallery-stat .gs-card:hover{transform:translateY(-3px);box-shadow:0 10px 24px #30204418}
-.gallery-stat .gs-card b{display:block;font-size:22px;background:linear-gradient(110deg,var(--purple),var(--purple2));-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800}
-.gallery-stat .gs-card small{color:var(--muted);font-size:11px;margin-top:3px;display:block}
-
 .hashtag-hero{padding:32px 26px;border-radius:24px;background:linear-gradient(120deg,#e9ddff,#fff1f7,#e9ddff);background-size:200% 200%;animation:gradient 8s ease infinite;color:#33234b;margin-bottom:20px;position:relative;overflow:hidden;box-shadow:var(--sh)}
 body.dark .hashtag-hero{background:linear-gradient(120deg,#3c2b56,#332332,#3c2b56);background-size:200% 200%;color:var(--ink)}
 .hashtag-hero .hh-hash{font-size:52px;font-weight:800;margin:0 0 8px;background:linear-gradient(110deg,var(--purple),var(--purple2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.1}
@@ -428,34 +421,13 @@ body.dark .hashtag-hero{background:linear-gradient(120deg,#3c2b56,#332332,#3c2b5
 .back-link{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;color:var(--purple);padding:8px 14px;border-radius:12px;background:var(--accent-soft);margin-bottom:14px;cursor:pointer;border:0;transition:.2s}
 .back-link:hover{transform:translateX(3px)}
 
-.story-viewer{position:fixed;inset:0;background:#0a0612f5;z-index:150;display:none;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(10px)}
-.story-viewer.open{display:flex;animation:fadeIn .25s}
-.story-stage{width:min(420px,100%);height:min(88vh,760px);position:relative;border-radius:22px;overflow:hidden;background:#1a1225;box-shadow:0 30px 80px #000c}
-.story-progress{position:absolute;top:14px;right:14px;left:14px;display:flex;gap:4px;z-index:2}
-.story-progress i{flex:1;height:3px;background:#ffffff33;border-radius:3px;overflow:hidden;display:block}
-.story-progress i b{display:block;height:100%;width:0;background:#fff}
-.story-progress i.done b{width:100%}
-.story-progress i.active b{animation:storyBar 5s linear forwards}
-.story-top{position:absolute;top:28px;right:16px;left:16px;display:flex;align-items:center;gap:11px;z-index:2;color:#fff}
-.story-top .avatar{border-color:#fff}
-.story-top strong{font-size:13px;color:#fff;display:block}
-.story-top small{font-size:11px;color:#ffffffb0}
-.story-close{margin-right:auto;background:#ffffff25;color:#fff;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;backdrop-filter:blur(6px);transition:.2s}
-.story-close:hover{background:#ffffff45;transform:rotate(90deg)}
-.story-nav{position:absolute;inset:0;display:flex;z-index:1}
-.story-nav button{flex:1;background:transparent}
-.story-content{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:80px 24px 100px;color:#fff;text-align:center}
-.story-content p{font-size:22px;line-height:1.8;font-weight:700;text-shadow:0 4px 20px #00000090}
-.story-gradient{position:absolute;inset:0;background:linear-gradient(135deg,#4c1d95,#7c3aed,#db2777);background-size:200% 200%;animation:gradient 6s ease infinite}
-
 @media(max-width:1120px){.app{grid-template-columns:210px minmax(0,1fr);gap:18px}.right{display:none}}
 @media(max-width:700px){
 .app{display:block;padding:12px 12px 96px}
 .side{display:none}
 .topbar{padding:10px 14px;margin-bottom:14px;position:static}
 .page-title{font-size:19px}
-.grid-art{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.art-tile{min-height:128px}
+.masonry{column-count:2;column-gap:8px}
 .mobile-nav{display:flex;position:fixed;z-index:50;bottom:0;right:0;left:0;background:color-mix(in srgb,var(--paper) 96%,transparent);border-top:1px solid var(--line);padding:8px 6px calc(8px + env(safe-area-inset-bottom));justify-content:space-around;backdrop-filter:blur(16px)}
 .mobile-nav button{display:grid;justify-items:center;gap:3px;padding:6px 12px;font-size:10px;border-radius:12px;width:auto}
 .mobile-nav button svg{width:22px;height:22px}
@@ -471,8 +443,10 @@ body.dark .hashtag-hero{background:linear-gradient(120deg,#3c2b56,#332332,#3c2b5
 .modal{padding:18px;border-radius:20px}
 .composer-modal{padding:0;border-radius:20px}
 .comment.reply{margin-right:20px}
-.gallery-stat{grid-template-columns:1fr}
 .hashtag-hero .hh-hash{font-size:38px}
+.explore-hero{height:160px}
+.explore-hero h2{font-size:22px}
+.explore-hero .eh-content{max-width:100%}
 }
 </style>
 </head>
@@ -519,6 +493,7 @@ body.dark .hashtag-hero{background:linear-gradient(120deg,#3c2b56,#332332,#3c2b5
 <nav class="nav" id="sideNav">
 <button class="active" data-page="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 10l9-7 9 7v10a2 2 0 01-2 2h-4v-6h-6v6H5a2 2 0 01-2-2z"/></svg>خانه</button>
 <button data-page="explore"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z" fill="currentColor"/></svg>اکسپلور</button>
+<button data-page="gallery"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>گالری هنری</button>
 <button data-page="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>جست‌وجو</button>
 <button data-page="notifications"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg>اعلان‌ها<span class="badge dot" id="unreadBadge" hidden></span></button>
 <button data-page="bookmarks"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>ذخیره‌شده‌ها</button>
@@ -541,8 +516,6 @@ body.dark .hashtag-hero{background:linear-gradient(120deg,#3c2b56,#332332,#3c2b5
 </header>
 
 <section id="page-home" class="page">
-<div class="section-head" style="margin-top:6px"><h2>داستان‌های امروز</h2><button class="text-btn" id="addStory">+ داستان</button></div>
-<div class="stories" id="stories"></div>
 <div class="card composer-inline" id="composerInline">
 <div class="ci-row"><img class="avatar" id="composerAvatar" alt=""><input id="quickPostText" placeholder="چه چیزی در ذهنت می‌گذرد؟" maxlength="600"></div>
 <div class="ci-actions">
@@ -558,9 +531,9 @@ body.dark .hashtag-hero{background:linear-gradient(120deg,#3c2b56,#332332,#3c2b5
 
 <section id="page-explore" class="page hidden">
 <div class="explore-hero">
-<img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=1200&h=400&fit=crop" alt="">
+<img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1400&h=500&fit=crop" alt="">
 <div class="eh-content">
-<div style="font-size:11px;letter-spacing:2px;color:#d9caff;font-weight:700;margin-bottom:6px">DISCOVER</div>
+<div class="eh-eyebrow">DISCOVER</div>
 <h2>دنیایی برای کشف</h2>
 <p>آدم‌ها، ایده‌ها و آثار تازه از سراسر لونو.</p>
 </div>
@@ -572,14 +545,22 @@ body.dark .hashtag-hero{background:linear-gradient(120deg,#3c2b56,#332332,#3c2b5
 <div class="section-head"><h2>👥 آدم‌های تازه</h2><button class="text-btn" id="refreshUsers">تازه‌سازی</button></div>
 <div class="suggest-scroll" id="suggestScroll"></div>
 
-<div class="section-head"><h2>🎨 گالری هنری</h2></div>
-<div class="gallery-stat" id="galleryStats"></div>
-<div class="chip-tabs" id="galleryFilters"><button class="chip active" data-style="all">همه</button><button class="chip" data-style="illustration">تصویرسازی</button><button class="chip" data-style="photography">عکاسی</button><button class="chip" data-style="digital">هنر دیجیتال</button><button class="chip" data-style="nature">طبیعت</button></div>
-<div class="grid-art" id="galleryGrid"></div>
-
 <div class="section-head"><h2>🌟 پست‌های کشف‌شده</h2></div>
 <div class="chip-tabs" id="exploreTabs"><button class="chip active" data-explore="new">جدید</button><button class="chip" data-explore="top">محبوب</button><button class="chip" data-explore="random">تصادفی</button></div>
 <div class="feed" id="exploreFeed"></div>
+</section>
+
+<section id="page-gallery" class="page hidden">
+<div class="explore-hero" style="height:170px">
+<img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=1400&h=500&fit=crop" alt="">
+<div class="eh-content">
+<div class="eh-eyebrow">LUNO ART SPACE</div>
+<h2>گالری هنری</h2>
+<p>آثار خلاقانه از هنرمندان لونو. با یک نگاه الهام بگیر.</p>
+</div>
+</div>
+<div class="chip-tabs" id="galleryFilters"><button class="chip active" data-style="all">همه</button><button class="chip" data-style="illustration">تصویرسازی</button><button class="chip" data-style="photography">عکاسی</button><button class="chip" data-style="digital">هنر دیجیتال</button><button class="chip" data-style="nature">طبیعت</button></div>
+<div class="masonry" id="galleryGrid"></div>
 </section>
 
 <section id="page-search" class="page hidden">
@@ -624,13 +605,14 @@ body.dark .hashtag-hero{background:linear-gradient(120deg,#3c2b56,#332332,#3c2b5
 <aside class="right">
 <div class="right-card"><h3>پیشنهاد برای تو</h3><div id="rightPeople"></div></div>
 <div class="right-card"><h3>آمار لونو</h3><div id="statsBox" style="font-size:12px;color:var(--muted);line-height:2"></div></div>
-<div class="right-footer">لونو · نسخه ۸٫۰</div>
+<div class="right-footer">لونو · نسخه ۹٫۰</div>
 </aside>
 </div>
 
 <nav class="mobile-nav" id="mobileNav">
 <button class="active" data-page="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 10l9-7 9 7v10a2 2 0 01-2 2h-4v-6h-6v6H5a2 2 0 01-2-2z"/></svg>خانه</button>
 <button data-page="explore"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z" fill="currentColor"/></svg>اکسپلور</button>
+<button data-page="gallery"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>گالری</button>
 <button data-page="notifications"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9"/></svg>اعلان‌ها<span class="dot" id="unreadBadgeMobile" hidden></span></button>
 <button data-page="profile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0116 0"/></svg>پروفایل</button>
 </nav>
@@ -681,31 +663,6 @@ body.dark .hashtag-hero{background:linear-gradient(120deg,#3c2b56,#332332,#3c2b5
 <div class="modal-backdrop" id="shareModal"><div class="modal"><div class="modal-head"><h2>اشتراک‌گذاری</h2><button class="close" data-close="shareModal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div><div id="shareBody"></div></div></div>
 
 <div class="modal-backdrop" id="confirmModal"><div class="modal" style="max-width:420px"><div class="modal-head"><h2 id="confirmTitle">تأیید</h2><button class="close" data-close="confirmModal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div><p id="confirmText" style="font-size:13.5px;line-height:2;margin:0 0 6px"></p><div class="modal-actions"><button class="primary" id="confirmYes">بله</button><button class="secondary" data-close="confirmModal">انصراف</button></div></div></div>
-
-<div class="modal-backdrop" id="storyModal"><div class="modal"><div class="modal-head"><h2>داستان تازه</h2><button class="close" data-close="storyModal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div>
-<form id="storyForm">
-<div class="field"><label for="storyText">متن داستان</label><textarea id="storyText" maxlength="200" placeholder="چی توی ذهنت داری؟" style="min-height:100px"></textarea></div>
-<div class="field"><label>رنگ پس‌زمینه</label>
-<div class="accent-row" id="storyColors">
-<button type="button" class="accent-dot active" data-color="0" style="background:linear-gradient(135deg,#4c1d95,#7c3aed,#db2777)"></button>
-<button type="button" class="accent-dot" data-color="1" style="background:linear-gradient(135deg,#1e40af,#3b82f6,#06b6d4)"></button>
-<button type="button" class="accent-dot" data-color="2" style="background:linear-gradient(135deg,#065f46,#10b981,#84cc16)"></button>
-<button type="button" class="accent-dot" data-color="3" style="background:linear-gradient(135deg,#9a3412,#f97316,#fbbf24)"></button>
-<button type="button" class="accent-dot" data-color="4" style="background:linear-gradient(135deg,#831843,#ec4899,#f472b6)"></button>
-</div>
-</div>
-<div class="modal-actions"><button class="primary" type="submit">ثبت</button><button class="secondary" type="button" data-close="storyModal">انصراف</button></div>
-</form></div></div>
-
-<div class="story-viewer" id="storyViewer">
-<div class="story-stage">
-<div class="story-gradient" id="storyGradient"></div>
-<div class="story-progress" id="storyProgress"></div>
-<div class="story-top"><img class="avatar sm" id="storyAvatar" alt=""><div class="person"><strong id="storyName"></strong><small id="storyTime"></small></div><button class="story-close" id="storyClose"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="18" height="18"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div>
-<div class="story-nav"><button id="storyPrev"></button><button id="storyNext"></button></div>
-<div class="story-content" id="storyContent"></div>
-</div>
-</div>
 
 <div class="menu-pop" id="contextMenu"></div>
 <div class="toast" id="toast"></div>
@@ -796,17 +753,15 @@ const IC = {
   reply:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 17H5a2 2 0 01-2-2V7a2 2 0 012-2h10a2 2 0 012 2v4"/><path d="M21 12l-6 6v-4h-4"/></svg>'
 };
 const EMOJIS = ['😊','😂','🥰','😍','🤩','😎','🤔','😅','🙃','😉','🎨','✨','💜','❤️','🔥','🌿','🌸','☀️','🌙','⭐','📷','🎵','☕','🍕','🎉','💯','👍','🙏','💪','🚀'];
-const STORY_COLORS = ['linear-gradient(135deg,#4c1d95,#7c3aed,#db2777)','linear-gradient(135deg,#1e40af,#3b82f6,#06b6d4)','linear-gradient(135deg,#065f46,#10b981,#84cc16)','linear-gradient(135deg,#9a3412,#f97316,#fbbf24)','linear-gradient(135deg,#831843,#ec4899,#f472b6)'];
 
 let me = null, myProfile = null;
-let allPosts = [], allProfiles = [], myLikes = [], mySaves = [], myFollows = [], myNotifs = [], allStories = [];
+let allPosts = [], allProfiles = [], myLikes = [], mySaves = [], myFollows = [], myNotifs = [];
 let page = 'home', profileTab = 'posts', currentUser = null, galleryFilter = 'all';
 let homeFilter = 'all', exploreTab = 'new', notifFilter = 'all';
 let composerMode = 'text', editingPostId = null;
 let feedUnsub = null;
 let lastTap = 0, lastLikeTime = {};
 let bootTimer = null, authFired = false;
-let storyIdx = 0, storyTimer = null;
 
 function applyTheme(){
   document.body.classList.toggle('dark', localStorage.getItem('luno_theme')==='dark');
@@ -837,7 +792,7 @@ window.addEventListener('scroll', () => {
 
 document.addEventListener('click', e => {
   const btn = e.target.closest('button');
-  if(!btn || btn.classList.contains('no-ripple') || btn.classList.contains('ct-btn') || btn.classList.contains('chip') || btn.classList.contains('story') || btn.classList.contains('accent-dot')) return;
+  if(!btn || btn.classList.contains('no-ripple') || btn.classList.contains('ct-btn') || btn.classList.contains('chip') || btn.classList.contains('accent-dot') || btn.classList.contains('pin')) return;
   const rect = btn.getBoundingClientRect();
   const ripple = document.createElement('span');
   const size = Math.max(rect.width, rect.height);
@@ -959,10 +914,9 @@ onAuthStateChanged(auth, async user => {
     showApp();
     updateMeUI();
     renderHome();
-    renderStories();
     renderNotifications();
     setupRealtime();
-    setInterval(()=>{ if(!document.hidden && me) loadAll().then(()=>{ if(page==='home') renderHome(); if(page==='notifications') renderNotifications(); }); }, 60000);
+    setInterval(()=>{ if(!document.hidden && me) loadAll().then(()=>{ if(page==='home') renderHome(); if(page==='notifications') renderNotifications(); }); }, 120000);
   } catch(err){
     console.error(err);
     hideBoot();
@@ -973,20 +927,18 @@ onAuthStateChanged(auth, async user => {
 
 async function loadAll(){
   try{
-    const [pr, po, lk, bm, fl, st] = await Promise.all([
+    const [pr, po, lk, bm, fl] = await Promise.all([
       getDocs(query(collection(db,'profiles'), orderBy('created_at','desc'), limit(100))),
       getDocs(query(collection(db,'posts'), orderBy('created_at','desc'), limit(200))),
       getDocs(query(collection(db,'likes'), where('user_id','==',me.uid))),
       getDocs(query(collection(db,'bookmarks'), where('user_id','==',me.uid))),
-      getDocs(query(collection(db,'follows'), where('follower_id','==',me.uid))),
-      getDocs(query(collection(db,'stories'), orderBy('created_at','desc'), limit(80)))
+      getDocs(query(collection(db,'follows'), where('follower_id','==',me.uid)))
     ]);
     allProfiles = pr.docs.map(d => ({id: d.id, ...d.data()}));
     allPosts = po.docs.map(d => ({id: d.id, ...d.data()}));
     myLikes = lk.docs.map(d => d.data().post_id);
     mySaves = bm.docs.map(d => d.data().bookmark_id || d.data().post_id).filter(Boolean);
     myFollows = fl.docs.map(d => d.data().following_id);
-    allStories = st.docs.map(d => ({id: d.id, ...d.data()}));
     try{
       const nt = await getDocs(query(collection(db,'notifications'), where('user_id','==',me.uid), limit(100)));
       myNotifs = nt.docs.map(d => ({id: d.id, ...d.data()}));
@@ -1004,6 +956,7 @@ async function refreshAll(){
   await loadAll();
   if(page==='home') renderHome();
   else if(page==='explore') renderExplore();
+  else if(page==='gallery') renderGallery();
   else if(page==='notifications') renderNotifications();
   else if(page==='bookmarks') renderBookmarks();
   else if(page==='profile') renderProfile();
@@ -1099,7 +1052,8 @@ function renderExplore(){
   if(exploreTab === 'new') ps = sortByDate(ps);
   if(exploreTab === 'top') ps = ps.sort((a,b)=>(b.likes_count||0)-(a.likes_count||0));
   if(exploreTab === 'random') ps = ps.sort(()=>Math.random()-0.5);
-  renderFeed('#exploreFeed', ps.slice(0, 30), 'هنوز پستی نیست.');
+  const withImages = ps.filter(p => p.image_url).slice(0, 20);
+  renderFeed('#exploreFeed', withImages.length ? withImages : ps.slice(0, 20), 'هنوز پستی نیست.');
 
   const tagCounts = {};
   allPosts.forEach(p => (p.tags||[]).forEach(t => tagCounts[t] = (tagCounts[t]||0)+1));
@@ -1111,39 +1065,36 @@ function renderExplore(){
     const av = avatarOf(p);
     return '<div class="suggest-card" style="animation-delay:'+(i*0.05)+'s"><img class="avatar" src="'+esc(av)+'" data-openuser="'+esc(p.id)+'"><strong>'+esc(p.name)+'</strong><small>@'+esc(p.handle)+'<br>'+esc((p.bio||'عضو لونو').slice(0,30))+'</small><button data-follow="'+esc(p.id)+'">دنبال‌کردن</button></div>';
   }).join('') : '<div class="sub" style="padding:14px">همه را دنبال کرده‌ای 🎉</div>';
-
-  renderGalleryStatsAndGrid();
 }
 
-function renderGalleryStatsAndGrid(){
+function renderGallery(){
   let arts = allPosts.filter(p => p.type==='art' && p.image_url);
   if(galleryFilter !== 'all') arts = arts.filter(p => (p.tags||[]).some(t => t.includes(galleryFilter)));
-  const stats = { total: arts.length, likes: arts.reduce((s,a)=>s+(a.likes_count||0),0), artists: new Set(arts.map(a=>a.user_id)).size };
-  $('#galleryStats').innerHTML = '<div class="gs-card"><b>'+fa(stats.total)+'</b><small>اثر</small></div><div class="gs-card"><b>'+fa(stats.likes)+'</b><small>پسند</small></div><div class="gs-card"><b>'+fa(stats.artists)+'</b><small>هنرمند</small></div>';
   const el = $('#galleryGrid');
-  if(!arts.length){ el.innerHTML = '<div class="card empty" style="grid-column:1/-1">هنوز اثری منتشر نشده.</div>'; return; }
-  el.innerHTML = arts.slice(0, 12).map((a,i) => { const au = profileById(a.user_id); return '<button class="art-tile" data-zoom="'+esc(a.image_url)+'" style="animation-delay:'+Math.min(i*0.03,0.4)+'s"><img src="'+esc(a.image_url)+'" loading="lazy"><span class="art-info"><strong>'+esc(a.title||'بدون عنوان')+'</strong><small>'+esc(au.name)+'</small></span></button>'; }).join('');
+  if(!arts.length){ el.innerHTML = '<div class="card empty" style="break-inside:avoid">هنوز اثری منتشر نشده.</div>'; return; }
+  el.innerHTML = arts.map((a,i) => {
+    const au = profileById(a.user_id);
+    const av = avatarOf(au);
+    const saved = mySaves.includes(a.id);
+    return '<div class="pin" data-artzoom="'+esc(a.image_url)+'" data-artid="'+a.id+'" style="animation-delay:'+Math.min(i*0.03,0.5)+'s">'+
+      '<img src="'+esc(a.image_url)+'" loading="lazy" alt="'+esc(a.title||'')+'">'+
+      '<div class="pin-overlay">'+
+        '<button data-pinsave="'+a.id+'" class="'+(saved?'saved':'')+'">'+IC.save+'</button>'+
+        '<button data-pinshare="'+a.id+'">'+IC.share+'</button>'+
+      '</div>'+
+      '<div class="pin-info">'+
+        (a.title?'<strong>'+esc(a.title)+'</strong>':'')+
+        '<small><img src="'+esc(av)+'">'+esc(au.name)+'</small>'+
+        '<div class="pin-stats"><span>'+IC.like+fa(a.likes_count||0)+'</span><span>'+IC.comment+fa(a.comments_count||0)+'</span></div>'+
+      '</div>'+
+    '</div>';
+  }).join('');
 }
 
 function personRow(p){
   const isF = myFollows.includes(p.id);
   const av = avatarOf(p);
   return '<div class="person-row"><img class="avatar" src="'+esc(av)+'" data-openuser="'+esc(p.id)+'"><div class="person" data-openuser="'+esc(p.id)+'"><strong>'+esc(p.name)+(p.is_admin?' <span class="verified-badge">'+VB+'</span>':'')+'</strong><small>@'+esc(p.handle)+' · '+esc(p.bio||'عضو لونو')+'</small></div><button class="mini-btn '+(isF?'following':'')+'" data-follow="'+esc(p.id)+'">'+(isF?'دنبال می‌کنی':'دنبال‌کردن')+'</button></div>';
-}
-
-function renderStories(){
-  const byUser = {};
-  allStories.forEach(s => { if(!byUser[s.user_id] || (s.created_at?.toDate?.().getTime()||0) > (byUser[s.user_id].created_at?.toDate?.().getTime()||0)) byUser[s.user_id] = s; });
-  const items = [{id:'mine', name:'داستان تو', avatar: avatarOf(myProfile), mine:true, hasStory: !!byUser[me.uid]}];
-  Object.values(byUser).forEach(s => {
-    if(s.user_id === me.uid) return;
-    const p = profileById(s.user_id);
-    items.push({id: s.user_id, name: p.name, avatar: avatarOf(p), mine: false, hasStory: true});
-  });
-  $('#stories').innerHTML = items.map((s,i) => {
-    const initial = s.name.split(' ')[0];
-    return '<button class="story '+(s.mine?'add':'')+(s.hasStory?' has-story':'')+'" data-story="'+esc(s.id)+'" style="animation-delay:'+Math.min(i*0.04,0.4)+'s"><div class="story-ring">'+(s.mine?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 5v14M5 12h14" stroke-width="2.5"/></svg>':'<img src="'+esc(s.avatar)+'" alt="">')+'</div>'+esc(s.mine?'داستان تو':initial)+'</button>';
-  }).join('');
 }
 
 function renderNotifications(){
@@ -1223,7 +1174,7 @@ function renderSettings(){
     '<div class="setting-row"><div class="s-main"><strong>خروج از حساب</strong><small>پایان دادن به نشست</small></div><button class="mini-btn danger" id="setLogout">خروج</button></div>'+
     '</div>'+
     '<div class="setting-group"><h3>درباره</h3>'+
-    '<div class="setting-row"><div class="s-main"><strong>لونو</strong><small>شبکه اجتماعی هنر و زندگی — نسخه ۸٫۰</small></div></div>'+
+    '<div class="setting-row"><div class="s-main"><strong>لونو</strong><small>شبکه اجتماعی هنر و زندگی — نسخه ۹٫۰</small></div></div>'+
     '</div>';
   setTimeout(()=>{
     const d = $('#setDark'); if(d) d.onchange = function(){ localStorage.setItem('luno_theme', this.checked?'dark':'light'); applyTheme(); };
@@ -1241,11 +1192,12 @@ function setPage(p){
   if(p !== 'hashtag' && p !== 'user'){ currentUser = (p === 'user' ? currentUser : null); }
   $$('.page').forEach(el => el.classList.toggle('hidden', el.id !== 'page-'+p));
   $$('[data-page]').forEach(b => b.classList.toggle('active', b.dataset.page === p));
-  const L = {home:['خانه','فید شخصی تو'],explore:['اکسپلور','دنیایی برای کشف'],search:['جست‌وجو','پیداکردن افراد و محتوا'],notifications:['اعلان‌ها','تعاملات تازه'],bookmarks:['ذخیره‌شده‌ها','محتوای ذخیره‌شده'],profile:['پروفایل من','صفحه شخصی تو'],settings:['تنظیمات','مدیریت حساب'],user:['پروفایل کاربر','صفحه کاربر']};
+  const L = {home:['خانه','فید شخصی تو'],explore:['اکسپلور','دنیایی برای کشف'],gallery:['گالری هنری','آثار خلاقانه'],search:['جست‌وجو','پیداکردن افراد و محتوا'],notifications:['اعلان‌ها','تعاملات تازه'],bookmarks:['ذخیره‌شده‌ها','محتوای ذخیره‌شده'],profile:['پروفایل من','صفحه شخصی تو'],settings:['تنظیمات','مدیریت حساب'],user:['پروفایل کاربر','صفحه کاربر']};
   const l = L[p] || ['لونو',''];
   $('#pageTitle').textContent = l[0]; $('#pageSubtitle').textContent = l[1];
-  if(p==='home'){ renderHome(); renderStories(); }
+  if(p==='home') renderHome();
   if(p==='explore') renderExplore();
+  if(p==='gallery') renderGallery();
   if(p==='notifications') renderNotifications();
   if(p==='bookmarks') renderBookmarks();
   if(p==='profile') renderProfile();
@@ -1322,6 +1274,7 @@ async function createOrUpdatePost(){
     if(page==='home') renderHome();
     else if(page==='profile') renderProfile();
     else if(page==='explore') renderExplore();
+    else if(page==='gallery') renderGallery();
     else setPage('home');
   }
   btn.disabled = false;
@@ -1394,6 +1347,7 @@ async function toggleSave(pid){
       btn.classList.toggle('saved', !has);
       btn.innerHTML = IC.save + ' ' + (has?'ذخیره':'ذخیره شده');
     });
+    $$('[data-pinsave="'+pid+'"]').forEach(btn => { btn.classList.toggle('saved', !has); });
   } catch(err){ toast('خطا: '+err.message,'err'); }
 }
 
@@ -1488,7 +1442,6 @@ $('#topTheme').onclick = $('#themeToggle').onclick = () => { const d = !document
 $('#newPostBtn').onclick = $('#newPostFromProfile').onclick = () => openComposer('text');
 $('#topAvatar').onclick = () => setPage('profile');
 $('#floatingRefresh').onclick = refreshAll;
-$('#addStory').onclick = () => { $('#storyText').value=''; openModal('storyModal'); };
 
 $$('#composerInline .ci-actions button[data-quick]').forEach(b => b.addEventListener('click', e => {
   e.stopPropagation();
@@ -1531,7 +1484,7 @@ $('#galleryFilters').addEventListener('click', e => {
   const b = e.target.closest('[data-style]'); if(!b) return;
   galleryFilter = b.dataset.style;
   $$('#galleryFilters .chip').forEach(x => x.classList.toggle('active', x===b));
-  renderGalleryStatsAndGrid();
+  renderGallery();
 });
 $('#notifFilters').addEventListener('click', e => {
   const b = e.target.closest('[data-notif]'); if(!b) return;
@@ -1558,24 +1511,6 @@ $('#composerText').addEventListener('keydown', e => { if((e.ctrlKey || e.metaKey
 $('#composerImage').addEventListener('input', function(){ const u = safeUrl(this.value); if(u){ $('#composerPreview').classList.remove('hidden'); $('#composerPreviewImg').src = u; } else $('#composerPreview').classList.add('hidden'); });
 $('#composerPreviewRm').onclick = () => { $('#composerImage').value=''; $('#composerPreview').classList.add('hidden'); $('#composerPreviewImg').src=''; };
 $('#composerSubmit').onclick = createOrUpdatePost;
-
-$('#storyForm').addEventListener('submit', async e => {
-  e.preventDefault();
-  const text = $('#storyText').value.trim();
-  if(!text){ toast('متن داستان را وارد کن.','err'); return; }
-  const colorIdx = $$('#storyColors .accent-dot').findIndex(b => b.classList.contains('active'));
-  try{
-    await addDoc(collection(db,'stories'), { user_id: me.uid, text, color: colorIdx>=0?colorIdx:0, created_at: serverTimestamp() });
-    closeModal('storyModal');
-    toast('داستان منتشر شد!','ok');
-    await loadAll();
-    renderStories();
-  } catch(err){ toast('خطا: '+err.message,'err'); }
-});
-$$('#storyColors .accent-dot').forEach(b => b.addEventListener('click', () => {
-  $$('#storyColors .accent-dot').forEach(x => x.classList.remove('active'));
-  b.classList.add('active');
-}));
 
 $('#profileForm').addEventListener('submit', async e => {
   e.preventDefault();
@@ -1645,34 +1580,16 @@ function handleImageDblTap(wrapper){
   } else { lastTap = now; }
 }
 
-function playStory(){
-  const s = allStories[storyIdx];
-  if(!s){ closeStory(); return; }
-  const p = profileById(s.user_id);
-  $('#storyAvatar').src = avatarOf(p);
-  $('#storyName').textContent = p.name;
-  $('#storyTime').textContent = timeAgo(s.created_at);
-  $('#storyGradient').style.background = STORY_COLORS[s.color||0];
-  $('#storyContent').innerHTML = '<p>'+esc(s.text)+'</p>';
-  $('#storyProgress').innerHTML = allStories.map((_,i)=>'<i class="'+(i<storyIdx?'done':(i===storyIdx?'active':''))+'"><b></b></i>').join('');
-  clearTimeout(storyTimer);
-  storyTimer = setTimeout(()=>{ storyIdx++; if(storyIdx >= allStories.length) closeStory(); else playStory(); }, 5000);
-}
-function openStory(uid){
-  const list = allStories.filter(s => s.user_id === uid);
-  if(!list.length) return;
-  storyIdx = allStories.findIndex(s => s.id === list[0].id);
-  playStory();
-  $('#storyViewer').classList.add('open');
-}
-function closeStory(){ clearTimeout(storyTimer); $('#storyViewer').classList.remove('open'); storyIdx = 0; }
-$('#storyClose').onclick = closeStory;
-$('#storyNext').onclick = () => { storyIdx++; if(storyIdx >= allStories.length) closeStory(); else playStory(); };
-$('#storyPrev').onclick = () => { storyIdx = Math.max(0, storyIdx-1); playStory(); };
-
 document.addEventListener('click', async e => {
   const t = e.target;
   if(!t.closest('#contextMenu')) $('#contextMenu').classList.remove('open');
+
+  const pinSave = t.closest('[data-pinsave]');
+  if(pinSave){ e.stopPropagation(); await toggleSave(pinSave.dataset.pinsave); renderGallery(); return; }
+  const pinShare = t.closest('[data-pinshare]');
+  if(pinShare){ e.stopPropagation(); sharePost(pinShare.dataset.pinshare); return; }
+  const pinZoom = t.closest('[data-artzoom]');
+  if(pinZoom){ e.stopPropagation(); const w = window.open(); w.document.write('<body style="margin:0;background:#000;display:grid;place-items:center;height:100vh"><img src="'+esc(pinZoom.dataset.artzoom)+'" style="max-width:100%;max-height:100vh"></body>'); return; }
 
   const like = t.closest('[data-like]');
   if(like){
@@ -1697,7 +1614,6 @@ document.addEventListener('click', async e => {
   const bb = t.closest('#backBtn'); if(bb){ setPage('home'); return; }
   const tg = t.closest('[data-tag]'); if(tg){ e.stopPropagation(); e.preventDefault(); renderHashtag(tg.dataset.tag); return; }
   const sh = t.closest('[data-share]'); if(sh){ e.stopPropagation(); sharePost(sh.dataset.share); return; }
-  const story = t.closest('[data-story]'); if(story){ const h = story.dataset.story; if(h === 'mine'){ $('#storyText').value=''; openModal('storyModal'); } else { openStory(h); } return; }
 
   const nshare = t.closest('[data-nativeshare]');
   if(nshare){ const p = allPosts.find(x => x.id === nshare.dataset.nativeshare); if(p && navigator.share) navigator.share({title:p.title||'پست لونو', text:p.text||'', url: location.href}).catch(()=>{}); closeModal('shareModal'); return; }
@@ -1726,7 +1642,7 @@ document.addEventListener('click', async e => {
     return;
   }
   const ep = t.closest('[data-editpost]'); if(ep){ const p4 = allPosts.find(x => x.id === ep.dataset.editpost); if(p4) openComposer(p4.type||'text', p4); return; }
-  const del = t.closest('[data-delpost]'); if(del){ const id = del.dataset.delpost; confirmAction('حذف پست','این پست حذف شود؟', async () => { try{ await deleteDoc(doc(db,'posts',id)); allPosts = allPosts.filter(p => p.id !== id); if(page==='home') renderHome(); if(page==='profile') renderProfile(); toast('حذف شد.','ok'); } catch(err){ toast('خطا: '+err.message,'err'); } }); return; }
+  const del = t.closest('[data-delpost]'); if(del){ const id = del.dataset.delpost; confirmAction('حذف پست','این پست حذف شود؟', async () => { try{ await deleteDoc(doc(db,'posts',id)); allPosts = allPosts.filter(p => p.id !== id); if(page==='home') renderHome(); if(page==='profile') renderProfile(); if(page==='gallery') renderGallery(); toast('حذف شد.','ok'); } catch(err){ toast('خطا: '+err.message,'err'); } }); return; }
   const cp = t.closest('[data-copypost]'); if(cp){ const p4 = allPosts.find(x => x.id === cp.dataset.copypost); if(p4 && navigator.clipboard) navigator.clipboard.writeText((p4.title||'')+'\n'+(p4.text||'')).then(()=>toast('کپی شد.','ok')); return; }
 });
 
@@ -1756,7 +1672,7 @@ function setupRealtime(){
 document.addEventListener('visibilitychange', () => {
   if(!document.hidden && me && page === 'home'){
     const now = Date.now();
-    if(now - (window._lastRefresh||0) > 60000){
+    if(now - (window._lastRefresh||0) > 120000){
       window._lastRefresh = now;
       loadAll().then(()=>renderHome());
     }
@@ -1764,4 +1680,4 @@ document.addEventListener('visibilitychange', () => {
 });
 </script>
 </body>
-  </html>
+                                                                                                                                                                               </html>
