@@ -38,6 +38,7 @@ svg{display:block;flex-shrink:0}
 @keyframes livePulse{0%,100%{box-shadow:0 0 0 0 #22c55e66}70%{box-shadow:0 0 0 8px #22c55e00}}
 @keyframes typingDot{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-4px)}}
 @keyframes sparkle{0%,100%{transform:scale(1);opacity:.7}50%{transform:scale(1.15);opacity:1}}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 
 .boot-screen{position:fixed;inset:0;background:linear-gradient(125deg,#2a1745 0%,var(--purple) 50%,var(--purple2) 100%);background-size:200% 200%;animation:gradient 8s ease infinite;display:grid;place-items:center;z-index:9999;transition:opacity .5s,visibility .5s}
 .boot-screen.hide{opacity:0;visibility:hidden}
@@ -60,6 +61,10 @@ svg{display:block;flex-shrink:0}
 .fab:hover{transform:scale(1.1) rotate(90deg)}
 .fab svg{width:26px;height:26px}
 @media(max-width:700px){.fab{bottom:92px;left:16px;width:54px;height:54px}}
+
+.undo-banner{position:fixed;bottom:26px;left:50%;transform:translate(-50%,120%);background:#1c1428;color:#fff;padding:14px 20px;border-radius:14px;font-size:13px;font-weight:600;z-index:200;display:flex;align-items:center;gap:14px;box-shadow:0 20px 50px #0006;transition:transform .35s cubic-bezier(.4,0,.2,1);max-width:90vw}
+.undo-banner.show{transform:translate(-50%,0)}
+.undo-banner button{background:var(--purple2);color:#fff;padding:8px 14px;border-radius:10px;font-weight:700;font-size:12px;flex-shrink:0}
 
 .auth-wrap{min-height:100vh;display:grid;place-items:center;padding:20px;background:linear-gradient(125deg,#2a1745 0%,var(--purple) 50%,var(--purple2) 100%);background-size:200% 200%;animation:gradient 10s ease infinite;position:relative;overflow:hidden}
 .auth-wrap:before,.auth-wrap:after{content:'';position:absolute;border-radius:50%;background:#ffffff12;pointer-events:none}
@@ -178,18 +183,13 @@ body.dark .welcome-banner{background:linear-gradient(120deg,#3c2b56,#332332)}
 .action.busy{opacity:.6;pointer-events:none}
 .action.just-liked svg{animation:heartPop .5s}
 .heart-burst{position:absolute;top:50%;left:50%;font-size:60px;pointer-events:none;animation:burst .8s ease-out forwards;opacity:0;transform:translate(-50%,-50%)}
-.reactions-summary{display:inline-flex;align-items:center;gap:2px;font-size:11px;color:var(--muted);padding:4px 8px;background:var(--soft);border-radius:999px;margin-left:auto}
-.reactions-summary .rs-item{font-size:12px}
+.reactions-chips{display:flex;gap:4px;margin-right:auto;align-items:center}
+.reactions-chips .r-chip{background:var(--soft);border-radius:999px;padding:4px 8px;font-size:11px;font-weight:700;display:inline-flex;align-items:center;gap:3px;cursor:pointer;border:0}
+.reactions-chips .r-chip:hover{background:var(--accent-soft)}
 
-.poll-block{margin:12px 0;padding:14px;background:var(--soft);border-radius:14px}
-.poll-options{display:grid;gap:8px}
-.poll-option{position:relative;padding:10px 12px;background:var(--paper);border-radius:11px;cursor:pointer;transition:.2s;font-size:13px;font-weight:600;overflow:hidden;border:1.5px solid transparent}
-.poll-option:hover{border-color:var(--purple)}
-.poll-option.voted{background:var(--accent-soft);border-color:var(--purple)}
-.poll-option .po-bar{position:absolute;inset:0 100% 0 auto;background:var(--accent-soft);transition:width .5s;z-index:0}
-.poll-option .po-content{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:center;gap:8px}
-.poll-option .po-percent{font-size:11px;color:var(--purple);font-weight:800}
-.poll-meta{margin-top:10px;font-size:11px;color:var(--muted);text-align:center}
+.skeleton{background:linear-gradient(90deg,var(--soft) 0%,var(--accent-soft) 50%,var(--soft) 100%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:12px}
+.skeleton-card{padding:18px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);display:grid;gap:12px}
+.skeleton-line{height:14px;border-radius:8px}
 
 .empty{padding:50px 22px;text-align:center;color:var(--muted);line-height:2;font-size:13.5px}
 .empty svg{width:56px;height:56px;margin:0 auto 16px;opacity:.35;stroke-width:1.5;animation:float 3s ease-in-out infinite}
@@ -221,13 +221,6 @@ body.dark .welcome-banner{background:linear-gradient(120deg,#3c2b56,#332332)}
 .search-top input{flex:1;background:var(--paper);border:1.5px solid var(--line);border-radius:14px;padding:13px 16px;color:var(--ink);font-size:13.5px;transition:.2s}
 .search-top input:focus{outline:none;border-color:var(--purple);box-shadow:0 0 0 4px color-mix(in srgb,var(--purple) 12%,transparent)}
 
-.trend-scroll{display:flex;gap:8px;overflow-x:auto;padding:3px 0 12px;scrollbar-width:none;margin-bottom:6px}
-.trend-scroll::-webkit-scrollbar{display:none}
-.trend-pill{flex-shrink:0;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-size:12px;font-weight:600;cursor:pointer;transition:.2s;display:inline-flex;align-items:center;gap:6px}
-.trend-pill:hover{border-color:var(--purple);color:var(--purple);transform:translateY(-2px)}
-.trend-pill .tp-rank{font-size:10px;font-weight:800;color:var(--purple);opacity:.7}
-.trend-pill .tp-count{font-size:10.5px;color:var(--muted)}
-
 .trend-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-bottom:8px}
 .trend-card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:14px;transition:all .25s;cursor:pointer;animation:fadeUp .4s backwards}
 .trend-card:hover{transform:translateY(-3px);box-shadow:0 10px 26px #30204418;border-color:color-mix(in srgb,var(--purple) 40%,var(--line))}
@@ -247,7 +240,7 @@ body.dark .welcome-banner{background:linear-gradient(120deg,#3c2b56,#332332)}
 .suggest-card button:hover{filter:brightness(1.08)}
 .suggest-card button.following{background:var(--soft);color:var(--muted)}
 
-.chip-tabs{display:flex;gap:8px;overflow:auto;padding:3px 0 12px;scrollbar-width:none;margin-bottom:6px}
+.chip-tabs{display:flex;gap:8px;overflow:auto;padding:3px 0 12px;scrollbar-width:none;margin-bottom:6px;position:sticky;top:76px;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(8px);z-index:10}
 .chip-tabs::-webkit-scrollbar{display:none}
 .chip{white-space:nowrap;border:1px solid var(--line);background:var(--paper);color:var(--muted);border-radius:999px;padding:8px 15px;font-size:12px;font-weight:600;transition:all .25s;cursor:pointer}
 .chip:hover{border-color:var(--purple);color:var(--purple)}
@@ -293,7 +286,7 @@ body.dark .welcome-banner{background:linear-gradient(120deg,#3c2b56,#332332)}
 .search-tabs{display:flex;gap:8px;margin-bottom:18px;overflow:auto;scrollbar-width:none}
 .search-tabs::-webkit-scrollbar{display:none}
 
-.profile-cover{height:210px;border-radius:24px;background:linear-gradient(120deg,#35204e,#7c56ca 60%,#e0b9e6,#7c56ca,#35204e);background-size:300% 300%;animation:gradient 12s ease infinite;position:relative;margin-bottom:72px;box-shadow:var(--sh)}
+.profile-cover{height:220px;border-radius:24px;background:linear-gradient(120deg,#35204e,#7c56ca 60%,#e0b9e6,#7c56ca,#35204e);background-size:300% 300%;animation:gradient 12s ease infinite;position:relative;margin-bottom:72px;box-shadow:var(--sh);background-size:cover;background-position:center}
 .cover-edit{position:absolute;left:14px;top:14px;z-index:2}
 .profile-head{position:absolute;right:24px;bottom:-60px;display:flex;align-items:end;gap:14px;z-index:2}
 .profile-head .avatar{width:110px;height:110px;border:5px solid var(--paper);box-shadow:var(--sh);cursor:default}
@@ -301,9 +294,6 @@ body.dark .welcome-banner{background:linear-gradient(120deg,#3c2b56,#332332)}
 .profile-head h2{margin:0 0 6px;font-size:22px;display:inline-flex;align-items:center;gap:6px;color:var(--ink)}
 .profile-head p{margin:0;color:var(--muted);font-size:13px}
 .profile-actions{position:absolute;left:24px;bottom:-46px;display:flex;gap:8px;z-index:2}
-.profile-stats{display:flex;gap:26px;margin:22px 0;flex-wrap:wrap}
-.profile-stats div{font-size:13px;color:var(--muted);font-weight:600}
-.profile-stats b{color:var(--ink);font-size:17px;margin-left:5px;font-weight:800}
 .profile-bio{font-size:14px;line-height:2;margin:0 0 14px;white-space:pre-wrap}
 .profile-meta{display:flex;flex-wrap:wrap;gap:16px;font-size:12px;color:var(--muted);margin-bottom:18px}
 .profile-meta span{display:inline-flex;align-items:center;gap:6px}
@@ -312,6 +302,12 @@ body.dark .welcome-banner{background:linear-gradient(120deg,#3c2b56,#332332)}
 .profile-tabs::-webkit-scrollbar{display:none}
 .profile-tabs button{border:0;background:transparent;padding:12px 15px;color:var(--muted);white-space:nowrap;font-weight:700;font-size:13px;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .25s}
 .profile-tabs button.active{color:var(--purple);border-bottom-color:var(--purple)}
+
+.stats-row{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:16px 0}
+.stat-card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px 14px;text-align:center;transition:all .25s;cursor:pointer}
+.stat-card:hover{transform:translateY(-3px);box-shadow:0 10px 24px #30204418;border-color:color-mix(in srgb,var(--purple) 40%,var(--line))}
+.stat-card .stat-value{font-size:24px;font-weight:800;background:linear-gradient(110deg,var(--purple),var(--purple2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1}
+.stat-card .stat-label{font-size:11.5px;color:var(--muted);margin-top:8px;font-weight:600}
 
 .setting-group{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:6px 20px;margin-bottom:16px;box-shadow:var(--sh)}
 .setting-group>h3{font-size:13px;margin:18px 0 4px;color:var(--purple);font-weight:800}
@@ -327,9 +323,6 @@ body.dark .welcome-banner{background:linear-gradient(120deg,#3c2b56,#332332)}
 .switch span:before{content:'';position:absolute;width:20px;height:20px;border-radius:50%;background:#fff;top:3px;right:3px;transition:.25s}
 .switch input:checked+span{background:var(--purple)}
 .switch input:checked+span:before{transform:translateX(-20px)}
-.accent-row{display:flex;gap:10px;flex-wrap:wrap}
-.accent-dot{width:32px;height:32px;border-radius:50%;border:3px solid transparent;cursor:pointer;transition:.2s}
-.accent-dot.active{border-color:var(--ink);transform:scale(1.15)}
 
 .avatar-picker{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:14px 0}
 .avatar-option{width:100%;aspect-ratio:1;border-radius:50%;cursor:pointer;transition:all .2s;border:3px solid transparent;position:relative;overflow:hidden}
@@ -391,11 +384,6 @@ body.dark .ai-assist{background:linear-gradient(120deg,#3c2b56,#332332)}
 .ai-assist .ai-text{flex:1;font-size:12px;font-weight:700;line-height:1.6}
 .ai-assist .ai-text small{display:block;font-size:10.5px;color:var(--muted);font-weight:500;margin-top:2px}
 .ai-assist .ai-arrow{color:var(--purple);font-size:18px}
-
-.ai-loading{display:flex;justify-content:center;gap:6px;padding:10px}
-.ai-loading span{width:8px;height:8px;background:var(--purple);border-radius:50%;animation:typingDot 1.4s infinite}
-.ai-loading span:nth-child(2){animation-delay:.2s}
-.ai-loading span:nth-child(3){animation-delay:.4s}
 
 .composer-extra{display:grid;gap:10px;padding:12px 16px;background:var(--soft);margin:12px 20px 0;border-radius:12px}
 .composer-extra.hidden{display:none}
@@ -519,28 +507,11 @@ body.dark .hashtag-hero{background:linear-gradient(120deg,#3c2b56,#332332,#3c2b5
 .admin-item .ai-actions button.approve:hover{background:#dcfce7;color:var(--ok);border-color:#86efac}
 .admin-online-dot{width:8px;height:8px;background:#22c55e;border-radius:50%;flex-shrink:0;animation:livePulse 2s infinite}
 
-.profile-stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin:16px 0}
-.ps-card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px;text-align:center}
-.ps-card .ps-value{font-size:22px;font-weight:800;background:linear-gradient(110deg,var(--purple),var(--purple2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1}
-.ps-card .ps-label{font-size:11px;color:var(--muted);margin-top:6px;font-weight:600}
-
 .saved-collections{display:flex;gap:8px;margin-bottom:14px;overflow-x:auto;scrollbar-width:none;padding-bottom:8px}
 .saved-collections::-webkit-scrollbar{display:none}
 .collection-chip{white-space:nowrap;padding:8px 14px;border-radius:12px;background:var(--paper);border:1px solid var(--line);font-size:12px;font-weight:600;cursor:pointer;transition:.2s}
 .collection-chip.active{background:linear-gradient(110deg,var(--purple),var(--purple2));color:#fff;border-color:var(--purple)}
 .collection-chip.add{background:var(--soft);color:var(--purple)}
-
-.community-card{background:var(--paper);border:1px solid var(--line);border-radius:18px;overflow:hidden;transition:all .25s;cursor:pointer;animation:fadeUp .4s backwards}
-.community-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px #30204418;border-color:color-mix(in srgb,var(--purple) 40%,var(--line))}
-.community-card .cc-cover{height:90px;background:linear-gradient(120deg,var(--purple),var(--purple2));position:relative}
-.community-card .cc-body{padding:14px}
-.community-card h4{margin:0 0 6px;font-size:14px;font-weight:800}
-.community-card p{margin:0 0 10px;font-size:11.5px;color:var(--muted);line-height:1.7}
-.community-card .cc-stats{display:flex;gap:12px;font-size:11px;color:var(--muted);margin-bottom:10px}
-.community-card button{width:100%;padding:8px;border-radius:10px;background:linear-gradient(110deg,var(--purple),var(--purple2));color:#fff;font-size:12px;font-weight:700;transition:.2s}
-.community-card button.joined{background:var(--soft);color:var(--muted)}
-
-.requests-badge{margin-right:auto;background:var(--danger);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:999px}
 
 @media(max-width:1120px){.app{grid-template-columns:210px minmax(0,1fr);gap:18px}.right{display:none}}
 @media(max-width:700px){
@@ -559,7 +530,6 @@ body.dark .hashtag-hero{background:linear-gradient(120deg,#3c2b56,#332332,#3c2b5
 .profile-head .avatar{width:90px;height:90px;border-width:4px}
 .profile-head h2{font-size:18px}
 .profile-actions{left:14px;bottom:-52px}
-.profile-stats{gap:16px;margin:18px 0}
 .auth-card{padding:24px}
 .modal{padding:18px;border-radius:20px}
 .composer-modal{padding:0;border-radius:20px}
@@ -569,6 +539,7 @@ body.dark .hashtag-hero{background:linear-gradient(120deg,#3c2b56,#332332,#3c2b5
 .explore-hero h2{font-size:22px}
 .explore-hero .eh-content{max-width:100%}
 .avatar-picker{grid-template-columns:repeat(3,1fr)}
+.chip-tabs{top:0}
 }
 </style>
 </head>
@@ -578,6 +549,8 @@ body.dark .hashtag-hero{background:linear-gradient(120deg,#3c2b56,#332332,#3c2b5
 <div class="pull-indicator" id="pullIndicator"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 5v14M5 12l7-7 7 7" stroke-width="2"/></svg></div>
 
 <button class="fab" id="fabBtn" title="پست تازه"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 5v14M5 12h14"/></svg></button>
+
+<div class="undo-banner" id="undoBanner"><span id="undoText">حذف شد.</span><button id="undoBtn">لغو</button></div>
 
 <div class="boot-screen" id="bootScreen">
 <div class="boot-logo">
@@ -615,7 +588,6 @@ body.dark .hashtag-hero{background:linear-gradient(120deg,#3c2b56,#332332,#3c2b5
 <nav class="nav" id="sideNav">
 <button class="active" data-page="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 10l9-7 9 7v10a2 2 0 01-2 2h-4v-6h-6v6H5a2 2 0 01-2-2z"/></svg>خانه</button>
 <button data-page="explore"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z" fill="currentColor"/></svg>اکسپلور</button>
-<button data-page="communities"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/></svg>انجمن‌ها</button>
 <button data-page="gallery"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>گالری هنری</button>
 <button data-page="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>جست‌وجو</button>
 <button data-page="notifications"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg>اعلان‌ها<span class="badge dot" id="unreadBadge" hidden></span></button>
@@ -650,8 +622,6 @@ body.dark .hashtag-hero{background:linear-gradient(120deg,#3c2b56,#332332,#3c2b5
 <p>آدم‌ها، ایده‌ها و آثار تازه از سراسر لونو.</p>
 </div>
 </div>
-<div class="section-head" style="margin-top:14px"><h2>🔥 داغ‌ترین‌ها</h2></div>
-<div class="trend-scroll" id="homeTrends"></div>
 <div class="card composer-inline" id="composerInline">
 <div class="ci-row"><img class="avatar" id="composerAvatar" alt=""><input id="quickPostText" placeholder="چه چیزی در ذهنت می‌گذرد؟" maxlength="600"></div>
 <div class="ci-actions">
@@ -661,8 +631,11 @@ body.dark .hashtag-hero{background:linear-gradient(120deg,#3c2b56,#332332,#3c2b5
 </div>
 </div>
 <div class="section-head" style="margin-top:22px"><h2>فید تو</h2><button class="text-btn" id="refreshFeed">تازه‌سازی</button></div>
-<div class="chip-tabs" id="homeFilters"><button class="chip active" data-filter="all">همه</button><button class="chip" data-filter="following">دنبال‌شده‌ها</button><button class="chip" data-filter="hot">داغ</button></div>
-<div class="feed" id="homeFeed"></div>
+<div class="chip-tabs" id="homeFilters"><button class="chip active" data-filter="all">برای تو</button><button class="chip" data-filter="following">دنبال‌شده‌ها</button></div>
+<div class="feed" id="homeFeed">
+<div class="skeleton-card"><div class="skeleton-line" style="width:40%"></div><div class="skeleton-line" style="width:80%"></div><div class="skeleton-line" style="width:60%"></div></div>
+</div>
+<button class="secondary" id="loadMoreBtn" style="width:100%;margin-top:14px">نمایش بیشتر</button>
 </section>
 
 <section id="page-explore" class="page hidden">
@@ -682,24 +655,6 @@ body.dark .hashtag-hero{background:linear-gradient(120deg,#3c2b56,#332332,#3c2b5
 <div class="section-head"><h2>🌟 پست‌های کشف‌شده</h2></div>
 <div class="chip-tabs" id="exploreTabs"><button class="chip active" data-explore="new">جدید</button><button class="chip" data-explore="top">محبوب</button><button class="chip" data-explore="random">تصادفی</button></div>
 <div class="feed" id="exploreFeed"></div>
-</section>
-
-<section id="page-communities" class="page hidden">
-<div class="explore-hero" style="height:150px">
-<img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1400&h=500&fit=crop" alt="">
-<div class="eh-content">
-<div class="eh-eyebrow">COMMUNITIES</div>
-<h2>انجمن‌های لونو</h2>
-<p>به گروه‌های موضوعی بپیوند و با آدم‌های هم‌سلیقه‌ات در ارتباط باش.</p>
-</div>
-</div>
-<div class="section-head" style="margin-top:14px"><h2>انجمن‌های فعال</h2><button class="text-btn" id="addCommunityBtn">+ ساخت انجمن</button></div>
-<div class="feed" id="communitiesList"></div>
-</section>
-
-<section id="page-community" class="page hidden">
-<button class="back-link" id="communityBack">→ بازگشت</button>
-<div id="communityDetail"></div>
 </section>
 
 <section id="page-gallery" class="page hidden">
@@ -774,12 +729,23 @@ body.dark .hashtag-hero{background:linear-gradient(120deg,#3c2b56,#332332,#3c2b5
 <div class="feed" id="hashtagFeed"></div>
 </section>
 
+<section id="page-followers" class="page hidden">
+<button class="back-link" id="followersBack">→ بازگشت</button>
+<div class="section-head" style="margin-top:0"><h2 id="followersTitle">دنبال‌کننده‌ها</h2></div>
+<div class="people-list" id="followersList"></div>
+</section>
+
 <section id="page-profile" class="page hidden">
-<div class="profile-cover" id="profileCover"><button class="mini-btn cover-edit" id="editProfileTop">ویرایش پروفایل</button><div class="profile-head"><img class="avatar" id="profileAvatar" alt=""><div><h2 id="profileName"></h2><p id="profileHandle"></p></div></div><div class="profile-actions"><button class="mini-btn" id="shareProfileBtn">اشتراک</button><button class="mini-btn" id="settingsBtn">تنظیمات</button></div></div>
+<div class="profile-cover" id="profileCover"><button class="mini-btn cover-edit" id="editCoverBtn">تغییر کاور</button><div class="profile-head"><img class="avatar" id="profileAvatar" alt=""><div><h2 id="profileName"></h2><p id="profileHandle"></p></div></div><div class="profile-actions"><button class="mini-btn" id="shareProfileBtn">اشتراک</button><button class="mini-btn" id="editProfileBtn">ویرایش</button></div></div>
 <p class="profile-bio" id="profileBio"></p>
 <div class="profile-meta" id="profileMeta"></div>
-<div class="profile-stats-grid" id="profileStatsGrid"></div>
-<div class="profile-tabs" id="profileTabs"><button class="active" data-profiletab="posts">پست‌ها</button><button data-profiletab="media">رسانه</button><button data-profiletab="saved">ذخیره</button><button data-profiletab="liked">پسندیده</button><button data-profiletab="activity">فعالیت</button><button data-profiletab="settings">تنظیمات</button></div>
+<div class="stats-row" id="profileStats">
+<div class="stat-card" data-stat="posts"><div class="stat-value" id="statPosts">0</div><div class="stat-label">پست</div></div>
+<div class="stat-card" data-stat="followers"><div class="stat-value" id="statFollowers">0</div><div class="stat-label">دنبال‌کننده</div></div>
+<div class="stat-card" data-stat="following"><div class="stat-value" id="statFollowing">0</div><div class="stat-label">دنبال‌شونده</div></div>
+<div class="stat-card" data-stat="views"><div class="stat-value" id="statViews">0</div><div class="stat-label">بازدید</div></div>
+</div>
+<div class="profile-tabs" id="profileTabs"><button class="active" data-profiletab="posts">پست‌ها</button><button data-profiletab="saved">ذخیره‌شده‌ها</button><button data-profiletab="settings">تنظیمات</button></div>
 <div id="profileContent"></div>
 </section>
 
@@ -788,14 +754,14 @@ body.dark .hashtag-hero{background:linear-gradient(120deg,#3c2b56,#332332,#3c2b5
 <aside class="right">
 <div class="right-card"><h3>پیشنهاد برای تو</h3><div id="rightPeople"></div></div>
 <div class="right-card"><h3>آمار لونو</h3><div id="statsBox" style="font-size:12px;color:var(--muted);line-height:2"></div></div>
-<div class="right-footer">لونو · نسخه ۱۲٫۰</div>
+<div class="right-footer">لونو · نسخه ۱۳٫۰</div>
 </aside>
 </div>
 
 <nav class="mobile-nav" id="mobileNav">
 <button class="active" data-page="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 10l9-7 9 7v10a2 2 0 01-2 2h-4v-6h-6v6H5a2 2 0 01-2-2z"/></svg>خانه</button>
 <button data-page="explore"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z" fill="currentColor"/></svg>اکسپلور</button>
-<button data-page="communities"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>انجمن‌ها</button>
+<button data-page="gallery"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>گالری</button>
 <button data-page="notifications"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9"/></svg>اعلان‌ها<span class="dot" id="unreadBadgeMobile" hidden></span></button>
 <button data-page="profile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0116 0"/></svg>پروفایل</button>
 </nav>
@@ -887,6 +853,21 @@ body.dark .hashtag-hero{background:linear-gradient(120deg,#3c2b56,#332332,#3c2b5
 <div class="modal-actions"><button class="primary" type="submit">ذخیره</button><button class="secondary" type="button" data-close="profileModal">انصراف</button></div>
 </form></div></div>
 
+<div class="modal-backdrop" id="coverModal"><div class="modal">
+<div class="modal-head"><h2>تغییر کاور پروفایل</h2><button class="close" data-close="coverModal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div>
+<form id="coverForm">
+<div class="field"><label for="coverUrl">لینک تصویر کاور</label><input id="coverUrl" type="url" placeholder="https://..."></div>
+<div class="field"><label>یا انتخاب از گالری</label>
+<label class="upload-btn" style="margin:0">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+انتخاب عکس کاور
+<input type="file" accept="image/*" id="coverFile" style="display:none">
+</label>
+</div>
+<div class="composer-preview hidden" id="coverPreview" style="margin:8px 0 0"><img id="coverPreviewImg" alt=""></div>
+<div class="modal-actions"><button class="primary" type="submit">ذخیره</button><button class="secondary" type="button" data-close="coverModal">انصراف</button></div>
+</form></div></div>
+
 <div class="modal-backdrop" id="commentsModal"><div class="modal wide"><div class="modal-head"><h2>نظرها</h2><button class="close" data-close="commentsModal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div><div id="commentsBody"></div></div></div>
 
 <div class="modal-backdrop" id="shareModal"><div class="modal"><div class="modal-head"><h2>اشتراک‌گذاری</h2><button class="close" data-close="shareModal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div><div id="shareBody"></div></div></div>
@@ -912,14 +893,6 @@ body.dark .hashtag-hero{background:linear-gradient(120deg,#3c2b56,#332332,#3c2b5
 </div>
 <div class="field"><label for="reportDesc">توضیحات (اختیاری)</label><textarea id="reportDesc" maxlength="200"></textarea></div>
 <div class="modal-actions"><button class="primary" type="submit">ثبت گزارش</button><button class="secondary" type="button" data-close="reportModal">انصراف</button></div>
-</form></div></div>
-
-<div class="modal-backdrop" id="communityCreateModal"><div class="modal">
-<div class="modal-head"><h2>ساخت انجمن</h2><button class="close" data-close="communityCreateModal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div>
-<form id="communityCreateForm">
-<div class="field"><label for="communityName">نام انجمن</label><input id="communityName" required maxlength="40" placeholder="مثلاً عکاسان لونو"></div>
-<div class="field"><label for="communityDesc">توضیحات</label><textarea id="communityDesc" maxlength="200" placeholder="این انجمن درباره چیه؟"></textarea></div>
-<div class="modal-actions"><button class="primary" type="submit">ساخت</button><button class="secondary" type="button" data-close="communityCreateModal">انصراف</button></div>
 </form></div></div>
 
 <div class="menu-pop" id="contextMenu"></div>
@@ -1002,6 +975,18 @@ function showApp(){ $('#authScreen').classList.add('hidden'); $('#appScreen').cl
 function showRetry(msg){ $('#retryBox').classList.add('show'); if(msg) $('#retryBox p').textContent=msg; }
 function hideRetry(){ $('#retryBox').classList.remove('show'); }
 
+function showUndoBanner(text, onUndo){
+  const b = $('#undoBanner');
+  $('#undoText').textContent = text;
+  const btn = $('#undoBtn');
+  const newBtn = btn.cloneNode(true);
+  btn.parentNode.replaceChild(newBtn, btn);
+  newBtn.addEventListener('click', () => { b.classList.remove('show'); onUndo && onUndo(); });
+  b.classList.add('show');
+  clearTimeout(showUndoBanner._t);
+  showUndoBanner._t = setTimeout(() => b.classList.remove('show'), 5000);
+}
+
 function renderRichText(text){
   let html = esc(text);
   html = html.replace(/(^|\s)#([\u0600-\u06FFa-zA-Z0-9_]+)/g, '$1<span class="hashtag" data-tag="$2">#$2</span>');
@@ -1040,8 +1025,7 @@ const IC = {
   posts:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>',
   eye:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>',
   flag:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>',
-  check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5" stroke-width="3"/></svg>',
-  sparkle:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2l2 6 6 2-6 2-2 6-2-6-6-2 6-2z" stroke-width="2"/></svg>'
+  check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5" stroke-width="3"/></svg>'
 };
 const EMOJIS = ['😊','😂','🥰','😍','🤩','😎','🤔','😅','🙃','😉','🎨','✨','💜','❤️','🔥','🌿','🌸','☀️','🌙','⭐','📷','🎵','☕','🍕','🎉','💯','👍','🙏','💪','🚀'];
 const REACTIONS = ['❤️','😂','😮','😢','👏'];
@@ -1052,7 +1036,7 @@ const AVATAR_TEMPLATES = [
   'photo-1507003211169-0a1dd7228f2d','photo-1531746020798-e6953c6e8e04','photo-1521119989659-a83eee488004'
 ];
 const WELCOME_EMOJIS = ['👋','✨','🎨','💜','🌸','🌿','🔥','☀️'];
-const WELCOME_TEXTS = ['امروز چی توی ذهنته؟','یه لحظه الهام‌بخش داری؟','چی تازه یاد گرفتی؟','دلت می‌خواد چی به اشتراک بذاری؟'];
+const WELCOME_TEXTS = ['امروز چی توی ذهنته؟','یه لحظه الهام‌بخش داری؟','چی تازه یاد گرفتی؟','دلت می‌خوای چی به اشتراک بذاری؟'];
 
 const AI_TEMPLATES = {
   poetic: [
@@ -1063,7 +1047,11 @@ const AI_TEMPLATES = {
     '{kw} رنگ دیگری از زندگی را به من نشان داد؛ رنگی که تا حالا ندیده بودم',
     'میان شلوغی روزگار، {kw} پناهگاهی بود که مرا به خودم بازگرداند',
     'هر بار که به {kw} می‌اندیشم، دلم پر از نوری می‌شود که وصف‌ناپذیر است',
-    'در آغوش {kw}، آرامشی یافتم که سال‌ها در پی‌اش بودم'
+    'در آغوش {kw}، آرامشی یافتم که سال‌ها در پی‌اش بودم',
+    '{kw} چون ستاره‌ای در آسمان دل من می‌درخشد و راه را نشانم می‌دهد',
+    'هر لحظه با {kw}، جهانی تازه در برابر چشمانم گشوده می‌شود',
+    'شعر {kw} را کسی سرود که دلش از عشق لبریز بود',
+    'سکوت {kw} از هزار کلمه گویاتر است'
   ],
   motivational: [
     '{kw} را جدی بگیر، چون همان چیزی است که فردا را می‌سازد',
@@ -1073,7 +1061,9 @@ const AI_TEMPLATES = {
     'موفقیت از جایی آغاز می‌شود که تصمیم می‌گیری به {kw} پایبند بمانی',
     'در مسیر {kw}، هیچ شکستی وجود ندارد؛ تنها درس‌هایی تازه است',
     'به {kw} بچسب، چون تنها راه رسیدن به آن رویایی است که در سر داری',
-    'زندگی با {kw} معنای تازه‌ای می‌گیرد؛ پس رهایش نکن'
+    'زندگی با {kw} معنای تازه‌ای می‌گیرد؛ پس رهایش نکن',
+    'امروز بهترین روز برای شروع مسیر {kw} است؛ همین حالا قدم اول را بردار',
+    '{kw} کلید دری است که تنها تو می‌توانی بازش کنی'
   ],
   casual: [
     'امروز درباره‌ی {kw} فکر می‌کردم و لبخند زدم',
@@ -1083,7 +1073,9 @@ const AI_TEMPLATES = {
     'نمی‌دونم چرا، ولی امروز {kw} بیشتر از همیشه به دلم نشست',
     'گاهی {kw} بهترین همراه روزهای منه',
     'داشتم چای می‌خوردم و به {kw} فکر می‌کردم؛ ترکیب قشنگی بود',
-    '{kw} شد بهانه‌ای برای اینکه امروز یه پست بنویسم'
+    '{kw} شد بهانه‌ای برای اینکه امروز یه پست بنویسم',
+    'حال و هوای امروزم با {kw} گره خورده',
+    '{kw} رو دوست دارم و اینو با تو قسمت می‌کنم'
   ],
   artistic: [
     '{kw} را با رنگ‌ها می‌بینم؛ رنگی که در هیچ پالتی پیدا نمی‌شود',
@@ -1093,15 +1085,17 @@ const AI_TEMPLATES = {
     '{kw} مرا به یاد بافتی می‌اندازد که هنوز کامل نشده',
     'هر رنگ {kw} داستانی دارد که منتظر روایت‌شدن است',
     '{kw} زیبایی را در جزئیاتی نشان می‌دهد که چشم عادی نمی‌بیند',
-    'در {kw} نوعی از هنر نهفته که تنها با احساس درک می‌شود'
+    'در {kw} نوعی از هنر نهفته که تنها با احساس درک می‌شود',
+    '{kw} مرز میان خیال و واقعیت را محو می‌کند',
+    'در نگاه هنرمندانه به {kw}، جهانی تازه متولد می‌شود'
   ]
 };
 
 let me = null, myProfile = null;
 let allPosts = [], allProfiles = [], myLikes = [], mySaves = [], myFollows = [], myNotifs = [];
-let allComments = [], allReactions = [], allCommunities = [], myCommunities = [];
-let myCollections = [], myReports = [], allReports = [], verifyRequests = [];
-let allActivities = [];
+let myFollowers = [];
+let allComments = [], allReactions = [], allReports = [], verifyRequests = [];
+let myCollections = [];
 let page = 'home', profileTab = 'posts', currentUser = null, galleryFilter = 'all';
 let homeFilter = 'all', exploreTab = 'new', notifFilter = 'all', searchAdvanced = 'recent';
 let composerMode = 'text', editingPostId = null;
@@ -1109,15 +1103,15 @@ let composerImageData = null;
 let feedUnsub = null, commentsUnsub = null, notifsUnsub = null;
 let lastTap = 0, lastLikeTime = {};
 let bootTimer = null, authFired = false;
-let adminStatsInterval = null;
 let selectedAvatarUrl = '';
 let activeCollection = 'all';
-let activeCommunity = null;
 let reactionPopupPost = null;
 let aiMode = 'poetic', aiLength = 10;
 let pollOptions = ['', ''];
-let offlineCache = {};
 let reportTarget = null;
+let postsLimit = 50;
+let undoAction = null;
+let lastDeleteSnapshot = null;
 
 function applyTheme(){
   const autoDark = localStorage.getItem('luno_auto_dark') === '1';
@@ -1125,8 +1119,6 @@ function applyTheme(){
   const isAutoDark = autoDark && (hour >= 19 || hour < 7);
   const manualDark = localStorage.getItem('luno_theme')==='dark';
   document.body.classList.toggle('dark', manualDark || isAutoDark);
-  const fs = localStorage.getItem('luno_fs')||'1';
-  document.documentElement.style.setProperty('--fs', fs);
   const accent = localStorage.getItem('luno_accent');
   if(accent){
     const colors = {purple:{p:'#6d42c7',l:'#8a64e8',s:'#eee5fc',d:'#b79aff',ds:'#2e2344'},blue:{p:'#2563eb',l:'#3b82f6',s:'#e0ebff',d:'#93c5fd',ds:'#1e2c47'},pink:{p:'#db2777',l:'#ec4899',s:'#fde4f0',d:'#f9a8d4',ds:'#3d1f2e'},green:{p:'#059669',l:'#10b981',s:'#d9f5ec',d:'#6ee7b7',ds:'#13332a'},orange:{p:'#ea580c',l:'#f97316',s:'#ffe9da',d:'#fdba74',ds:'#3d2415'}};
@@ -1137,16 +1129,48 @@ function applyTheme(){
 applyTheme();
 setInterval(applyTheme, 60000);
 
-function saveOfflineCache(){
+function saveDraft(){
+  if(editingPostId) return;
   try{
-    const cache = { posts: allPosts.slice(0, 50), profiles: allProfiles.slice(0, 50), ts: Date.now() };
-    localStorage.setItem('luno_offline', JSON.stringify(cache));
+    const draft = {
+      text: $('#composerText').value,
+      image: composerImageData,
+      title: $('#composerTitle2').value,
+      tags: $('#composerTags').value,
+      location: $('#composerLocation').value,
+      mode: composerMode,
+      poll: composerMode === 'poll' ? pollOptions : null,
+      ts: Date.now()
+    };
+    if(draft.text || draft.image || draft.title){
+      localStorage.setItem('luno_draft', JSON.stringify(draft));
+    }
   }catch{}
 }
-function loadOfflineCache(){
+setInterval(saveDraft, 5000);
+
+function loadDraft(){
   try{
-    const c = JSON.parse(localStorage.getItem('luno_offline') || 'null');
-    if(c && c.posts) { allPosts = c.posts; allProfiles = c.profiles || []; }
+    const d = JSON.parse(localStorage.getItem('luno_draft') || 'null');
+    if(!d || !d.text) return;
+    if(Date.now() - d.ts > 7*24*3600*1000){ localStorage.removeItem('luno_draft'); return; }
+    confirmAction('بازیابی پیش‌نویس','یه پیش‌نویس ذخیره‌شده داری. می‌خوای ادامه بدی؟', () => {
+      composerMode = d.mode || 'text';
+      pollOptions = d.poll || ['',''];
+      $('#composerText').value = d.text || '';
+      $('#composerTitle2').value = d.title || '';
+      $('#composerTags').value = d.tags || '';
+      $('#composerLocation').value = d.location || '';
+      composerImageData = d.image || null;
+      $$('.ct-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === composerMode));
+      $('#composerExtra').classList.toggle('hidden', composerMode === 'text' || composerMode === 'poll');
+      $('#pollExtra').classList.toggle('hidden', composerMode !== 'poll');
+      if(composerImageData){ $('#composerPreview').classList.remove('hidden'); $('#composerPreviewImg').src = composerImageData; }
+      updateCharCount();
+      openModal('composerModal');
+      if(composerMode === 'poll') renderPollOptions();
+    });
+    localStorage.removeItem('luno_draft');
   }catch{}
 }
 
@@ -1159,11 +1183,17 @@ window.addEventListener('scroll', () => {
   const p = h > 0 ? (window.scrollY / h) * 100 : 0;
   const fill = $('#progressFill');
   if(fill) fill.style.width = p + '%';
+  if(page === 'home' && h > 0 && window.scrollY > h - 500){
+    const btn = $('#loadMoreBtn');
+    if(btn && !btn.disabled && postsLimit < state.postsCache?.length){
+      btn.click();
+    }
+  }
 }, {passive:true});
 
 document.addEventListener('click', e => {
   const btn = e.target.closest('button');
-  if(!btn || btn.classList.contains('no-ripple') || btn.classList.contains('ct-btn') || btn.classList.contains('chip') || btn.classList.contains('accent-dot') || btn.classList.contains('pin') || btn.classList.contains('avatar-option') || btn.classList.contains('collection-chip')) return;
+  if(!btn || btn.classList.contains('no-ripple') || btn.classList.contains('ct-btn') || btn.classList.contains('chip') || btn.classList.contains('accent-dot') || btn.classList.contains('pin') || btn.classList.contains('avatar-option') || btn.classList.contains('collection-chip') || btn.classList.contains('stat-card') || btn.classList.contains('poll-option') || btn.classList.contains('r-chip')) return;
   const rect = btn.getBoundingClientRect();
   const ripple = document.createElement('span');
   const size = Math.max(rect.width, rect.height);
@@ -1247,7 +1277,7 @@ $('#authForm').addEventListener('submit', async e => {
       const cred = await createUserWithEmailAndPassword(auth, email, pass);
       const isAdmin = email.toLowerCase() === ADMIN_EMAIL;
       const randomAvatar = 'https://images.unsplash.com/' + AVATAR_TEMPLATES[Math.floor(Math.random()*AVATAR_TEMPLATES.length)] + '?w=200&h=200&fit=crop';
-      await setDoc(doc(db,'profiles',cred.user.uid), { uid: cred.user.uid, handle, name, bio:'', avatar_url:randomAvatar, location:'', is_admin: isAdmin, verified: false, is_private: false, created_at: serverTimestamp(), last_seen: serverTimestamp() });
+      await setDoc(doc(db,'profiles',cred.user.uid), { uid: cred.user.uid, handle, name, bio:'', avatar_url:randomAvatar, cover_url:'', location:'', is_admin: isAdmin, verified: false, is_private: false, views: 0, created_at: serverTimestamp(), last_seen: serverTimestamp() });
       toast('خوش آمدی '+name+'!','ok');
     } else {
       await signInWithEmailAndPassword(auth, email, pass);
@@ -1264,7 +1294,7 @@ $('#authForm').addEventListener('submit', async e => {
   }
 });
 
-$('#logoutBtn').onclick = () => confirmAction('خروج','از حساب خودت خارج می‌شوی؟', async () => { try{ if(feedUnsub) feedUnsub(); if(commentsUnsub) commentsUnsub(); if(notifsUnsub) notifsUnsub(); if(adminStatsInterval) clearInterval(adminStatsInterval); }catch{} await signOut(auth); location.reload(); });
+$('#logoutBtn').onclick = () => confirmAction('خروج','از حساب خودت خارج می‌شوی؟', async () => { try{ if(feedUnsub) feedUnsub(); if(commentsUnsub) commentsUnsub(); if(notifsUnsub) notifsUnsub(); }catch{} await signOut(auth); location.reload(); });
 
 onAuthStateChanged(auth, async user => {
   authFired = true;
@@ -1278,7 +1308,7 @@ onAuthStateChanged(auth, async user => {
       const isAdmin = me.email && me.email.toLowerCase() === ADMIN_EMAIL;
       const h = 'user' + me.uid.slice(0,6);
       const randomAvatar = 'https://images.unsplash.com/' + AVATAR_TEMPLATES[Math.floor(Math.random()*AVATAR_TEMPLATES.length)] + '?w=200&h=200&fit=crop';
-      await setDoc(pRef, { uid: me.uid, handle:h, name:'کاربر لونو', bio:'', avatar_url:randomAvatar, location:'', is_admin: isAdmin, verified: false, is_private: false, created_at: serverTimestamp(), last_seen: serverTimestamp() });
+      await setDoc(pRef, { uid: me.uid, handle:h, name:'کاربر لونو', bio:'', avatar_url:randomAvatar, cover_url:'', location:'', is_admin: isAdmin, verified: false, is_private: false, views: 0, created_at: serverTimestamp(), last_seen: serverTimestamp() });
       pSnap = await getDoc(pRef);
     }
     myProfile = pSnap.data();
@@ -1287,7 +1317,6 @@ onAuthStateChanged(auth, async user => {
       $('#adminBtn').classList.remove('hidden');
     }
     await loadAll();
-    loadOfflineCache();
     hideBoot();
     showApp();
     updateMeUI();
@@ -1298,7 +1327,8 @@ onAuthStateChanged(auth, async user => {
     setupCommentsListener();
     updateLastSeen();
     setInterval(updateLastSeen, 30000);
-    setInterval(()=>{ if(!document.hidden && me) loadAll().then(()=>{ saveOfflineCache(); if(page==='home') renderHome(); if(page==='notifications') renderNotifications(); }); }, 120000);
+    setInterval(()=>{ if(!document.hidden && me) loadAll().then(()=>{ if(page==='home') renderHome(); if(page==='notifications') renderNotifications(); }); }, 120000);
+    setTimeout(loadDraft, 1500);
   } catch(err){
     console.error(err);
     hideBoot();
@@ -1323,18 +1353,20 @@ function renderWelcome(){
 
 async function loadAll(){
   try{
-    const [pr, po, lk, bm, fl] = await Promise.all([
+    const [pr, po, lk, bm, fl, flr] = await Promise.all([
       getDocs(query(collection(db,'profiles'), orderBy('created_at','desc'), limit(100))),
       getDocs(query(collection(db,'posts'), orderBy('created_at','desc'), limit(200))),
       getDocs(query(collection(db,'likes'), where('user_id','==',me.uid))),
       getDocs(query(collection(db,'bookmarks'), where('user_id','==',me.uid))),
-      getDocs(query(collection(db,'follows'), where('follower_id','==',me.uid)))
+      getDocs(query(collection(db,'follows'), where('follower_id','==',me.uid))),
+      getDocs(query(collection(db,'follows'), where('following_id','==',me.uid)))
     ]);
     allProfiles = pr.docs.map(d => ({id: d.id, ...d.data()}));
     allPosts = po.docs.map(d => ({id: d.id, ...d.data()}));
     myLikes = lk.docs.map(d => d.data().post_id);
     mySaves = bm.docs.map(d => d.data().bookmark_id || d.data().post_id).filter(Boolean);
     myFollows = fl.docs.map(d => d.data().following_id);
+    myFollowers = flr.docs.map(d => d.data().follower_id);
     try{
       const nt = await getDocs(query(collection(db,'notifications'), where('user_id','==',me.uid), limit(100)));
       myNotifs = nt.docs.map(d => ({id: d.id, ...d.data()}));
@@ -1349,10 +1381,6 @@ async function loadAll(){
       myCollections = coll.docs.map(d => ({id: d.id, ...d.data()}));
     } catch { myCollections = []; }
     try{
-      const comm = await getDocs(query(collection(db,'communities'), orderBy('created_at','desc'), limit(100)));
-      allCommunities = comm.docs.map(d => ({id: d.id, ...d.data()}));
-    } catch { allCommunities = []; }
-    try{
       const rp = await getDocs(query(collection(db,'reports'), orderBy('created_at','desc'), limit(100)));
       allReports = rp.docs.map(d => ({id: d.id, ...d.data()}));
     } catch { allReports = []; }
@@ -1360,7 +1388,6 @@ async function loadAll(){
       const vr = await getDocs(query(collection(db,'profiles'), where('verify_requested','==',true)));
       verifyRequests = vr.docs.map(d => ({id: d.id, ...d.data()}));
     } catch { verifyRequests = []; }
-    saveOfflineCache();
     updateNotifBadge();
   } catch(err){ console.error(err); }
 }
@@ -1391,7 +1418,6 @@ async function refreshAll(){
   else if(page==='bookmarks') renderBookmarks();
   else if(page==='profile') renderProfile();
   else if(page==='admin') renderAdmin();
-  else if(page==='communities') renderCommunities();
   toast('تازه شد.','ok');
 }
 
@@ -1417,18 +1443,17 @@ function updateMeUI(){
   if(myProfile.location) meta.push('<span>'+IC.loc+esc(myProfile.location)+'</span>');
   meta.push('<span>📅 عضو جدید</span>');
   $('#profileMeta').innerHTML = meta.join('');
+  if(myProfile.cover_url){
+    $('#profileCover').style.backgroundImage = 'linear-gradient(120deg,#35204e88,#7c56ca88), url("'+esc(myProfile.cover_url)+'")';
+  } else {
+    $('#profileCover').style.backgroundImage = '';
+  }
   const mp = allPosts.filter(p => p.user_id === me.uid);
-  const totalLikes = mp.reduce((s,p)=>s+(p.likes_count||0),0);
-  const bestPost = mp.length ? mp.reduce((a,b)=>(a.likes_count||0)>(b.likes_count||0)?a:b) : null;
-  const profileViews = myProfile.views || 0;
-  $('#profileStatsGrid').innerHTML =
-    '<div class="ps-card"><div class="ps-value">'+fa(mp.length)+'</div><div class="ps-label">پست</div></div>'+
-    '<div class="ps-card"><div class="ps-value">'+fa(myFollows.length)+'</div><div class="ps-label">دنبال‌شونده</div></div>'+
-    '<div class="ps-card"><div class="ps-value">'+fa(totalLikes)+'</div><div class="ps-label">پسند</div></div>'+
-    '<div class="ps-card"><div class="ps-value">'+fa(mySaves.length)+'</div><div class="ps-label">ذخیره</div></div>'+
-    '<div class="ps-card"><div class="ps-value">'+fa(profileViews)+'</div><div class="ps-label">بازدید پروفایل</div></div>'+
-    (bestPost ? '<div class="ps-card" style="grid-column:span 2"><div class="ps-value">'+fa(bestPost.likes_count||0)+'</div><div class="ps-label">محبوب‌ترین پست: '+esc((bestPost.title||bestPost.text||'—').slice(0,30))+'</div></div>' : '');
-  $('#statsBox').innerHTML = '<div>👥 '+fa(allProfiles.length)+' کاربر</div><div>📝 '+fa(allPosts.length)+' پست</div><div>💬 '+fa(allCommunities.length)+' انجمن</div>';
+  $('#statPosts').textContent = fa(mp.length);
+  $('#statFollowers').textContent = fa(myFollowers.length);
+  $('#statFollowing').textContent = fa(myFollows.length);
+  $('#statViews').textContent = fa(myProfile.views || 0);
+  $('#statsBox').innerHTML = '<div>👥 '+fa(allProfiles.length)+' کاربر</div><div>📝 '+fa(allPosts.length)+' پست</div>';
 }
 
 function postCard(p, idx){
@@ -1449,11 +1474,11 @@ function postCard(p, idx){
   if(p.poll && p.poll.options){
     const totalVotes = p.poll.options.reduce((s,o)=>s+(o.votes||0),0) || 0;
     const myVote = p.poll.options.findIndex(o => (o.voters||[]).includes(me.uid));
-    pollBlock = '<div class="poll-block"><div class="poll-options">'+p.poll.options.map((o,i) => {
+    pollBlock = '<div class="poll-block" style="margin:12px 0;padding:14px;background:var(--soft);border-radius:14px"><div class="poll-options" style="display:grid;gap:8px">'+p.poll.options.map((o,i) => {
       const pct = totalVotes > 0 ? Math.round((o.votes||0)/totalVotes*100) : 0;
       const voted = myVote === i;
-      return '<div class="poll-option '+(voted?'voted':'')+'" data-pollvote="'+p.id+'" data-pollidx="'+i+'"><div class="po-bar" style="width:'+(myVote>=0?pct:0)+'%"></div><div class="po-content"><span>'+esc(o.text)+'</span>'+(myVote>=0?'<span class="po-percent">'+fa(pct)+'٪</span>':'')+'</div></div>';
-    }).join('')+'</div><div class="poll-meta">'+fa(totalVotes)+' رأی'+(myVote>=0?' · رأی تو: '+esc(p.poll.options[myVote].text):'')+'</div></div>';
+      return '<div class="poll-option '+(voted?'voted':'')+'" data-pollvote="'+p.id+'" data-pollidx="'+i+'" style="position:relative;padding:10px 12px;background:var(--paper);border-radius:11px;cursor:pointer;transition:.2s;font-size:13px;font-weight:600;overflow:hidden;border:1.5px solid '+(voted?'var(--purple)':'transparent')+'"><div class="po-bar" style="position:absolute;top:0;bottom:0;right:0;background:var(--accent-soft);width:'+(myVote>=0?pct:0)+'%;transition:width .5s;z-index:0"></div><div class="po-content" style="position:relative;z-index:1;display:flex;justify-content:space-between;align-items:center;gap:8px"><span>'+esc(o.text)+'</span>'+(myVote>=0?'<span style="font-size:11px;color:var(--purple);font-weight:800">'+fa(pct)+'٪</span>':'')+'</div></div>';
+    }).join('')+'</div><div style="margin-top:10px;font-size:11px;color:var(--muted);text-align:center">'+fa(totalVotes)+' رأی'+(myVote>=0?' · رأی تو: '+esc(p.poll.options[myVote].text):'')+'</div></div>';
   }
   const delay = Math.min((idx||0)*0.04, 0.5);
   const isVerified = author.verified || author.is_admin;
@@ -1494,15 +1519,14 @@ function sortByDate(arr){
 function renderHome(){
   let ps = [...allPosts];
   if(homeFilter === 'following') ps = ps.filter(p => myFollows.includes(p.user_id) || p.user_id === me.uid);
-  if(homeFilter === 'hot') ps = ps.sort((a,b)=>(b.likes_count||0)-(a.likes_count||0)).slice(0,30);
-  ps = homeFilter === 'hot' ? ps : sortByDate(ps);
-  if(!ps.length && homeFilter === 'following') ps = sortByDate(allPosts).slice(0,20);
-  renderFeed('#homeFeed', ps, 'هنوز پستی از دنبال‌شده‌ها نیست. از اکسپلور آدم‌های تازه پیدا کن!');
-
-  const tagCounts = {};
-  allPosts.forEach(p => (p.tags||[]).forEach(t => tagCounts[t] = (tagCounts[t]||0)+1));
-  const topTags = Object.entries(tagCounts).sort((a,b)=>b[1]-a[1]).slice(0, 8);
-  $('#homeTrends').innerHTML = topTags.length ? topTags.map(([t,c],i)=>'<button class="trend-pill" data-tag="'+esc(t)+'"><span class="tp-rank">#'+fa(i+1)+'</span>#'+esc(t)+' <span class="tp-count">'+fa(c)+'</span></button>').join('') : '<div class="sub" style="padding:6px">هنوز هشتگی نیست.</div>';
+  ps = sortByDate(ps);
+  const sliced = ps.slice(0, postsLimit);
+  renderFeed('#homeFeed', sliced, 'هنوز پستی از دنبال‌شده‌ها نیست. از اکسپلور آدم‌های تازه پیدا کن!');
+  const loadMoreBtn = $('#loadMoreBtn');
+  if(loadMoreBtn){
+    if(ps.length > postsLimit) { loadMoreBtn.classList.remove('hidden'); loadMoreBtn.disabled = false; }
+    else { loadMoreBtn.classList.add('hidden'); }
+  }
 }
 
 function renderExplore(){
@@ -1522,24 +1546,6 @@ function renderExplore(){
     const av = avatarOf(p);
     return '<div class="suggest-card" style="animation-delay:'+(i*0.05)+'s"><img class="avatar" src="'+esc(av)+'" data-openuser="'+esc(p.id)+'"><strong>'+esc(p.name)+'</strong><small>@'+esc(p.handle)+'<br>'+esc((p.bio||'عضو لونو').slice(0,30))+'</small><button data-follow="'+esc(p.id)+'">دنبال‌کردن</button></div>';
   }).join('') : '<div class="sub" style="padding:14px">همه را دنبال کرده‌ای 🎉</div>';
-}
-
-function renderCommunities(){
-  const el = $('#communitiesList');
-  if(!allCommunities.length){ el.innerHTML = '<div class="card empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>هنوز انجمنی نیست. اولین نفر باش!</div>'; return; }
-  el.innerHTML = allCommunities.map((c,i)=>{
-    const joined = (c.members||[]).includes(me.uid);
-    const creator = profileById(c.creator_id);
-    return '<div class="community-card" data-community="'+c.id+'" style="animation-delay:'+(i*0.05)+'s">'+
-      '<div class="cc-cover"></div>'+
-      '<div class="cc-body">'+
-        '<h4>'+esc(c.name)+'</h4>'+
-        '<p>'+esc((c.description||'').slice(0,80))+'</p>'+
-        '<div class="cc-stats"><span>👥 '+fa((c.members||[]).length)+' عضو</span><span>👤 '+esc(creator.name||'کاربر')+'</span></div>'+
-        '<button class="'+(joined?'joined':'')+'" data-joincommunity="'+c.id+'">'+(joined?'عضو هستی':'عضو شدن')+'</button>'+
-      '</div>'+
-    '</div>';
-  }).join('');
 }
 
 function renderGallery(){
@@ -1591,16 +1597,8 @@ function renderProfile(){
     renderSettings();
     return;
   }
-  if(profileTab === 'activity'){
-    const myPosts = allPosts.filter(p => p.user_id === me.uid);
-    const recent = sortByDate(myPosts).slice(0, 10);
-    $('#profileContent').innerHTML = recent.length ? '<div class="feed">'+recent.map((p,i)=>postCard(p,i)).join('')+'</div>' : '<div class="card empty">فعالیتی نیست.</div>';
-    return;
-  }
   let ps = allPosts.filter(p => p.user_id === me.uid);
-  if(profileTab==='media') ps = ps.filter(p => p.image_url);
   if(profileTab==='saved') ps = allPosts.filter(p => mySaves.includes(p.id));
-  if(profileTab==='liked') ps = allPosts.filter(p => myLikes.includes(p.id));
   renderFeed('#profileContent', ps, 'این بخش خالی است.');
 }
 
@@ -1631,8 +1629,9 @@ function renderUserPage(uid){
   const av = avatarOf(p);
   const isVerified = p.verified || p.is_admin;
   const vb = isVerified ? '<span class="verified-badge">'+VB+'</span>' : '';
+  const coverStyle = p.cover_url ? 'background-image:linear-gradient(120deg,#35204e88,#7c56ca88),url(\''+esc(p.cover_url)+'\');background-size:cover;background-position:center' : '';
   $('#userProfileWrap').innerHTML = '<button class="mini-btn" id="backBtn" style="margin-bottom:14px">→ بازگشت</button>'+
-    '<div class="profile-cover" style="margin-bottom:72px"><div class="profile-head"><img class="avatar" src="'+esc(av)+'"><div><h2>'+esc(p.name)+' '+vb+'</h2><p>@'+esc(p.handle)+'</p></div></div><div class="profile-actions"><button class="mini-btn '+(isF?'following':'solid')+'" data-follow="'+esc(uid)+'">'+(isF?'دنبال می‌کنی':'دنبال‌کردن')+'</button></div></div>'+
+    '<div class="profile-cover" style="margin-bottom:72px;'+coverStyle+'"><div class="profile-head"><img class="avatar" src="'+esc(av)+'"><div><h2>'+esc(p.name)+' '+vb+'</h2><p>@'+esc(p.handle)+'</p></div></div><div class="profile-actions"><button class="mini-btn '+(isF?'following':'solid')+'" data-follow="'+esc(uid)+'">'+(isF?'دنبال می‌کنی':'دنبال‌کردن')+'</button></div></div>'+
     (p.bio?'<p class="profile-bio">'+esc(p.bio)+'</p>':'')+
     '<div class="profile-stats"><div><b>'+fa(posts.length)+'</b> پست</div></div>'+
     (posts.length ? '<div class="feed">'+posts.map((x,i)=>postCard(x,i)).join('')+'</div>' : '<div class="card empty">پستی منتشر نشده.</div>');
@@ -1655,9 +1654,16 @@ function renderHashtag(tag){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
+function renderFollowers(kind){
+  const handles = kind === 'followers' ? myFollowers : myFollows;
+  const list = handles.map(h => allProfiles.find(p => p.id === h)).filter(Boolean);
+  $('#followersTitle').textContent = kind === 'followers' ? 'دنبال‌کننده‌ها' : 'دنبال‌شونده‌ها';
+  $('#followersList').innerHTML = list.length ? list.map(personRow).join('') : '<div class="card empty">لیست خالیه.</div>';
+  setPage('followers');
+}
+
 function renderSettings(){
   const accent = localStorage.getItem('luno_accent') || 'purple';
-  const fs = localStorage.getItem('luno_fs') || '1';
   const autoDark = localStorage.getItem('luno_auto_dark') === '1';
   const accents = {purple:'#6d42c7',blue:'#2563eb',pink:'#db2777',green:'#059669',orange:'#ea580c'};
   const isPrivate = myProfile.is_private || false;
@@ -1677,19 +1683,17 @@ function renderSettings(){
     '</div>'+
     '<div class="setting-group"><h3>حساب</h3>'+
     '<div class="setting-row"><div class="s-main"><strong>ایمیل</strong><small>'+esc(me.email||'')+'</small></div></div>'+
-    '<div class="setting-row"><div class="s-main"><strong>ویرایش پروفایل</strong><small>نام، کاربری، بیو، آواتار</small></div><button class="mini-btn solid" id="setEditProfile">ویرایش</button></div>'+
     '<div class="setting-row"><div class="s-main"><strong>تغییر رمز عبور</strong><small>دریافت لینک بازیابی</small></div><button class="mini-btn" id="setChangePass">ارسال لینک</button></div>'+
     '<div class="setting-row"><div class="s-main"><strong>خروج از حساب</strong><small>پایان دادن به نشست</small></div><button class="mini-btn danger" id="setLogout">خروج</button></div>'+
     '</div>'+
     '<div class="setting-group"><h3>درباره</h3>'+
-    '<div class="setting-row"><div class="s-main"><strong>لونو</strong><small>شبکه اجتماعی هنر و زندگی — نسخه ۱۲٫۰</small></div></div>'+
+    '<div class="setting-row"><div class="s-main"><strong>لونو</strong><small>شبکه اجتماعی هنر و زندگی — نسخه ۱۳٫۰</small></div></div>'+
     '</div>';
   setTimeout(()=>{
     const d = $('#setDark'); if(d) d.onchange = function(){ localStorage.setItem('luno_theme', this.checked?'dark':'light'); applyTheme(); };
     const ad = $('#setAutoDark'); if(ad) ad.onchange = function(){ localStorage.setItem('luno_auto_dark', this.checked?'1':'0'); applyTheme(); };
     const pv = $('#setPrivate'); if(pv) pv.onchange = async function(){ try{ await updateDoc(doc(db,'profiles',me.uid), { is_private: this.checked }); myProfile.is_private = this.checked; toast('ذخیره شد.','ok'); }catch(err){ toast('خطا: '+err.message,'err'); } };
     const l = $('#setLogout'); if(l) l.onclick = () => $('#logoutBtn').click();
-    const e = $('#setEditProfile'); if(e) e.onclick = () => $('#editProfileTop').click();
     const cp = $('#setChangePass'); if(cp) cp.onclick = async () => { try{ await sendPasswordResetEmail(auth, me.email); toast('لینک بازیابی فرستاده شد.','ok'); }catch(err){ toast('خطا: '+err.message,'err'); } };
     const rv = $('#setRequestVerify'); if(rv) rv.onclick = async () => { try{ await updateDoc(doc(db,'profiles',me.uid), { verify_requested: true }); myProfile.verify_requested = true; toast('درخواست ثبت شد.','ok'); renderSettings(); }catch(err){ toast('خطا: '+err.message,'err'); } };
     $$('[data-accent]').forEach(b => b.onclick = () => { localStorage.setItem('luno_accent', b.dataset.accent); applyTheme(); renderSettings(); });
@@ -1737,7 +1741,6 @@ async function renderAdmin(){
 
   const reports = allReports.slice(0, 20);
   $('#adminReports').innerHTML = reports.length ? reports.map(r => {
-    const reporter = profileById(r.reporter_id);
     return '<div class="admin-item"><div class="notif-icon" style="width:36px;height:36px">'+IC.flag+'</div><div class="ai-main"><strong>'+esc(r.type)+'</strong><small>'+esc((r.description||'').slice(0,50))+' · '+timeAgo(r.created_at)+'</small></div><div class="ai-actions"><button data-delreport="'+r.id+'" title="پاک کردن">'+IC.trash+'</button></div></div>';
   }).join('') : '<div class="sub" style="padding:14px">گزارشی نیست.</div>';
 
@@ -1778,15 +1781,14 @@ async function renderAdmin(){
 
 function setPage(p){
   page = p;
-  if(p !== 'hashtag' && p !== 'user' && p !== 'community'){ currentUser = (p === 'user' ? currentUser : null); activeCommunity = (p === 'community' ? activeCommunity : null); }
+  if(p !== 'hashtag' && p !== 'user' && p !== 'followers'){ currentUser = (p === 'user' ? currentUser : null); }
   $$('.page').forEach(el => el.classList.toggle('hidden', el.id !== 'page-'+p));
   $$('[data-page]').forEach(b => b.classList.toggle('active', b.dataset.page === p));
-  const L = {home:['خانه','دنیایی برای کشف'],explore:['اکسپلور','دنیایی برای کشف'],communities:['انجمن‌ها','گروه‌های موضوعی'],gallery:['گالری هنری','آثار خلاقانه'],search:['جست‌وجو','پیداکردن افراد و محتوا'],notifications:['اعلان‌ها','تعاملات تازه'],bookmarks:['ذخیره‌شده‌ها','محتوای ذخیره‌شده'],profile:['پروفایل من','صفحه شخصی تو'],user:['پروفایل کاربر','صفحه کاربر'],admin:['پنل مدیریت','آمار و ابزار ادمین'],community:['انجمن','صفحه انجمن']};
+  const L = {home:['خانه','دنیایی برای کشف'],explore:['اکسپلور','دنیایی برای کشف'],gallery:['گالری هنری','آثار خلاقانه'],search:['جست‌وجو','پیداکردن افراد و محتوا'],notifications:['اعلان‌ها','تعاملات تازه'],bookmarks:['ذخیره‌شده‌ها','محتوای ذخیره‌شده'],profile:['پروفایل من','صفحه شخصی تو'],user:['پروفایل کاربر','صفحه کاربر'],admin:['پنل مدیریت','آمار و ابزار ادمین'],followers:['دنبال‌کننده‌ها','لیست کاربران']};
   const l = L[p] || ['لونو',''];
   $('#pageTitle').textContent = l[0]; $('#pageSubtitle').textContent = l[1];
   if(p==='home') renderHome();
   if(p==='explore') renderExplore();
-  if(p==='communities') renderCommunities();
   if(p==='gallery') renderGallery();
   if(p==='notifications') renderNotifications();
   if(p==='bookmarks') renderBookmarks();
@@ -1846,6 +1848,17 @@ $('#fileInput').addEventListener('change', async e => {
   } catch(err){ toast('خطا در پردازش عکس.','err'); }
 });
 
+$('#coverFile').addEventListener('change', async e => {
+  const file = e.target.files[0]; if(!file) return;
+  if(file.size > 5*1024*1024){ toast('کاور باید زیر ۵ مگابایت باشه.','err'); return; }
+  try{
+    const dataUrl = await compressImage(file, 1200, 0.75);
+    $('#coverUrl').value = dataUrl;
+    $('#coverPreview').classList.remove('hidden');
+    $('#coverPreviewImg').src = dataUrl;
+  } catch(err){ toast('خطا در پردازش عکس.','err'); }
+});
+
 function compressImage(file, maxWidth, quality){
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -1891,7 +1904,6 @@ async function createPostFromData(data){
   try{
     const ref = await addDoc(collection(db,'posts'), row);
     allPosts.unshift({ id: ref.id, ...row, created_at: {toDate:()=>new Date()} });
-    // mention notifications
     const mentions = extractMentions(row.text);
     for(const h of mentions){
       const target = allProfiles.find(p => p.handle === h);
@@ -1924,6 +1936,7 @@ async function createOrUpdatePost(){
   if(ok){
     toast(editingPostId?'ویرایش شد.':'منتشر شد.','ok');
     closeModal('composerModal');
+    if(!editingPostId) localStorage.removeItem('luno_draft');
     const fresh = await getDocs(query(collection(db,'posts'), orderBy('created_at','desc'), limit(200)));
     allPosts = fresh.docs.map(d => ({id: d.id, ...d.data()}));
     if(page==='home') renderHome();
@@ -1989,7 +2002,6 @@ async function votePoll(pid, idx){
   const opt = p.poll.options[idx];
   if(!opt) return;
   if((opt.voters||[]).includes(me.uid)){ toast('قبلاً رأی دادی.'); return; }
-  // remove from others
   p.poll.options.forEach(o => { o.voters = (o.voters||[]).filter(v => v !== me.uid); });
   opt.voters = [...(opt.voters||[]), me.uid];
   opt.votes = (opt.votes||0) + 1;
@@ -2047,19 +2059,6 @@ async function toggleFollow(uid){
     $$('[data-follow="'+uid+'"]').forEach(b => { b.classList.toggle('following', !has); b.textContent = !has?'دنبال می‌کنی':'دنبال‌کردن'; });
     if(page === 'explore') renderExplore();
   } catch(err){ toast('خطا: '+err.message,'err'); }
-}
-
-async function joinCommunity(cid){
-  const c = allCommunities.find(x => x.id === cid); if(!c) return;
-  const members = c.members || [];
-  const isMember = members.includes(me.uid);
-  const newMembers = isMember ? members.filter(m => m !== me.uid) : [...members, me.uid];
-  try{
-    await updateDoc(doc(db,'communities',cid), { members: newMembers });
-    c.members = newMembers;
-    toast(isMember?'از انجمن خارج شدی.':'عضو انجمن شدی.','ok');
-    renderCommunities();
-  }catch(err){ toast('خطا: '+err.message,'err'); }
 }
 
 let activeCommentPost = null;
@@ -2221,9 +2220,29 @@ $('#adminBtn').onclick = () => { if(myProfile?.is_admin) setPage('admin'); };
 $('#topTheme').onclick = $('#themeToggle').onclick = () => { const d = !document.body.classList.contains('dark'); localStorage.setItem('luno_theme', d?'dark':'light'); applyTheme(); };
 $('#fabBtn').onclick = () => openComposer('text');
 $('#topAvatar').onclick = () => setPage('profile');
-$('#settingsBtn').onclick = () => { profileTab = 'settings'; setPage('profile'); };
-$('#communityBack').onclick = () => setPage('communities');
-$('#addCommunityBtn').onclick = () => openModal('communityCreateModal');
+$('#editProfileBtn').onclick = $('#editProfileTop') && (() => {});
+$('#editProfileBtn').onclick = () => {
+  $('#editName').value = myProfile.name; $('#editHandle').value = myProfile.handle; $('#editBio').value = myProfile.bio||'';
+  $('#editLocation').value = myProfile.location||'';
+  selectedAvatarUrl = myProfile.avatar_url || '';
+  buildAvatarPicker();
+  openModal('profileModal');
+};
+$('#editCoverBtn').onclick = () => {
+  $('#coverUrl').value = myProfile.cover_url || '';
+  $('#coverPreview').classList.add('hidden');
+  openModal('coverModal');
+};
+$('#shareProfileBtn').onclick = () => { if(navigator.clipboard) navigator.clipboard.writeText(location.href).then(()=>toast('لینک کپی شد.','ok')); };
+$('#refreshFeed').onclick = refreshAll;
+$('#refreshUsers').onclick = refreshAll;
+$('#loadMoreBtn').onclick = () => { postsLimit += 50; renderHome(); };
+$('#markRead').onclick = async () => {
+  try{ for(const n of myNotifs){ if(!n.read) await updateDoc(doc(db,'notifications',n.id),{read:true}); } }catch{}
+  myNotifs.forEach(n=>n.read=true); renderNotifications(); toast('همه خوانده شد.','ok');
+};
+$('#hashtagBack').onclick = () => setPage('home');
+$('#followersBack').onclick = () => setPage('profile');
 
 $$('#composerInline .ci-actions button[data-quick]').forEach(b => b.addEventListener('click', e => {
   e.stopPropagation();
@@ -2235,22 +2254,6 @@ $('#composerInline').addEventListener('click', e => {
   if(e.target.closest('.ci-actions') || e.target.tagName === 'INPUT') return;
   openComposer('text');
 });
-
-$('#editProfileTop').onclick = () => {
-  $('#editName').value = myProfile.name; $('#editHandle').value = myProfile.handle; $('#editBio').value = myProfile.bio||'';
-  $('#editLocation').value = myProfile.location||'';
-  selectedAvatarUrl = myProfile.avatar_url || '';
-  buildAvatarPicker();
-  openModal('profileModal');
-};
-$('#shareProfileBtn').onclick = () => { if(navigator.clipboard) navigator.clipboard.writeText(location.href).then(()=>toast('لینک کپی شد.','ok')); };
-$('#refreshFeed').onclick = refreshAll;
-$('#refreshUsers').onclick = refreshAll;
-$('#markRead').onclick = async () => {
-  try{ for(const n of myNotifs){ if(!n.read) await updateDoc(doc(db,'notifications',n.id),{read:true}); } }catch{}
-  myNotifs.forEach(n=>n.read=true); renderNotifications(); toast('همه خوانده شد.','ok');
-};
-$('#hashtagBack').onclick = () => setPage('home');
 
 $('#homeFilters').addEventListener('click', e => {
   const b = e.target.closest('[data-filter]'); if(!b) return;
@@ -2349,6 +2352,16 @@ $('#profileForm').addEventListener('submit', async e => {
   } catch(err){ toast('خطا: '+err.message,'err'); }
 });
 
+$('#coverForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const url = safeUrl($('#coverUrl').value);
+  try{
+    await updateDoc(doc(db,'profiles',me.uid), { cover_url: url });
+    myProfile.cover_url = url;
+    closeModal('coverModal'); updateMeUI(); toast('کاور ذخیره شد.','ok');
+  } catch(err){ toast('خطا: '+err.message,'err'); }
+});
+
 $('#collectionForm').addEventListener('submit', async e => {
   e.preventDefault();
   const name = $('#collectionName').value.trim();
@@ -2367,22 +2380,6 @@ $('#reportForm').addEventListener('submit', async e => {
   closeModal('reportModal');
   $('#reportDesc').value = '';
   reportTarget = null;
-});
-
-$('#communityCreateForm').addEventListener('submit', async e => {
-  e.preventDefault();
-  const name = $('#communityName').value.trim();
-  const desc = $('#communityDesc').value.trim();
-  if(!name) return;
-  try{
-    const ref = await addDoc(collection(db,'communities'), { name, description: desc, creator_id: me.uid, members: [me.uid], created_at: serverTimestamp() });
-    allCommunities.unshift({ id: ref.id, name, description: desc, creator_id: me.uid, members: [me.uid], created_at: {toDate:()=>new Date()} });
-    toast('انجمن ساخته شد.','ok');
-    closeModal('communityCreateModal');
-    $('#communityName').value = '';
-    $('#communityDesc').value = '';
-    renderCommunities();
-  }catch(err){ toast('خطا: '+err.message,'err'); }
 });
 
 $$('[data-close]').forEach(b => b.addEventListener('click', () => closeModal(b.dataset.close)));
@@ -2487,6 +2484,14 @@ document.addEventListener('click', async e => {
   const tg = t.closest('[data-tag]'); if(tg){ e.stopPropagation(); e.preventDefault(); renderHashtag(tg.dataset.tag); return; }
   const sh = t.closest('[data-share]'); if(sh){ e.stopPropagation(); sharePost(sh.dataset.share); return; }
 
+  const statCard = t.closest('[data-stat]');
+  if(statCard){
+    const s = statCard.dataset.stat;
+    if(s === 'followers') renderFollowers('followers');
+    else if(s === 'following') renderFollowers('following');
+    return;
+  }
+
   const mentionInsert = t.closest('[data-mentioninsert]');
   if(mentionInsert){
     const inp = $('#newCommentInput');
@@ -2498,12 +2503,6 @@ document.addEventListener('click', async e => {
     return;
   }
 
-  const joinComm = t.closest('[data-joincommunity]');
-  if(joinComm){ e.stopPropagation(); await joinCommunity(joinComm.dataset.joincommunity); return; }
-
-  const commCard = t.closest('[data-community]');
-  if(commCard){ setPage('communities'); return; }
-
   const collection = t.closest('[data-collection]');
   if(collection){
     if(collection.id === 'addCollectionBtn'){ openModal('collectionModal'); return; }
@@ -2514,7 +2513,6 @@ document.addEventListener('click', async e => {
   const reportComment = t.closest('[data-reportcomment]');
   if(reportComment){ reportTarget = 'comment:' + reportComment.dataset.reportcomment; openModal('reportModal'); return; }
 
-  // ADMIN
   const verifyUser = t.closest('[data-verifyuser]');
   if(verifyUser && myProfile?.is_admin){
     e.stopPropagation();
@@ -2559,8 +2557,20 @@ document.addEventListener('click', async e => {
   if(adminPost && myProfile?.is_admin){
     e.stopPropagation();
     const pid = adminPost.dataset.adminpost;
+    const post = allPosts.find(p => p.id === pid);
     confirmAction('حذف پست','این پست حذف شود؟', async () => {
-      try{ await deleteDoc(doc(db,'posts',pid)); allPosts = allPosts.filter(p => p.id !== pid); toast('حذف شد.','ok'); renderAdmin(); }
+      try{ 
+        lastDeleteSnapshot = { post };
+        await deleteDoc(doc(db,'posts',pid)); 
+        allPosts = allPosts.filter(p => p.id !== pid); 
+        toast('حذف شد.','ok'); 
+        renderAdmin();
+        showUndoBanner('پست حذف شد.', async () => {
+          if(lastDeleteSnapshot?.post){
+            try{ await setDoc(doc(db,'posts',pid), lastDeleteSnapshot.post); allPosts.push(lastDeleteSnapshot.post); renderAdmin(); renderHome(); toast('بازگردانی شد.','ok'); }catch{}
+          }
+        });
+      }
       catch(err){ toast('خطا: '+err.message,'err'); }
     });
     return;
@@ -2586,9 +2596,27 @@ document.addEventListener('click', async e => {
   if(rp){ const cs = await loadComments(activeCommentPost); replyToComment = cs.find(c => c.id === rp.dataset.reply); renderCommentsModal(activeCommentPost); return; }
 
   const dcm = t.closest('[data-delcomment]');
-  if(dcm){ const cid = dcm.dataset.delcomment, pid = dcm.dataset.postid; confirmAction('حذف نظر','این نظر حذف شود؟', async () => {
-    try{ await deleteDoc(doc(db,'comments',cid)); try{ await updateDoc(doc(db,'posts',pid), { comments_count: increment(-1) }); }catch{} const p = allPosts.find(x=>x.id===pid); if(p) p.comments_count = Math.max(0,(p.comments_count||0)-1); await renderCommentsModal(pid); if(page==='home') renderHome(); }catch(err){ toast('خطا: '+err.message,'err'); }
-  }); return; }
+  if(dcm){ const cid = dcm.dataset.delcomment, pid = dcm.dataset.postid; 
+    const cs = await loadComments(pid);
+    const comment = cs.find(c => c.id === cid);
+    confirmAction('حذف نظر','این نظر حذف شود؟', async () => {
+      try{ 
+        lastDeleteSnapshot = { comment, pid };
+        await deleteDoc(doc(db,'comments',cid)); 
+        try{ await updateDoc(doc(db,'posts',pid), { comments_count: increment(-1) }); }catch{} 
+        const p = allPosts.find(x=>x.id===pid); 
+        if(p) p.comments_count = Math.max(0,(p.comments_count||0)-1); 
+        await renderCommentsModal(pid); 
+        if(page==='home') renderHome();
+        showUndoBanner('نظر حذف شد.', async () => {
+          if(lastDeleteSnapshot?.comment){
+            try{ await setDoc(doc(db,'comments',cid), lastDeleteSnapshot.comment); try{ await updateDoc(doc(db,'posts',pid), { comments_count: increment(1) }); }catch{} toast('بازگردانی شد.','ok'); renderCommentsModal(pid); renderHome(); }catch{}
+          }
+        });
+      }catch(err){ toast('خطا: '+err.message,'err'); }
+    }); 
+    return; 
+  }
 
   const mn = t.closest('[data-postmenu]');
   if(mn){
@@ -2602,7 +2630,7 @@ document.addEventListener('click', async e => {
     $('#contextMenu').innerHTML =
       (canDelete ? (isMine ? '<button data-editpost="'+pid+'">'+IC.edit+' ویرایش</button>' : '') + '<button class="danger" data-delpost="'+pid+'">'+IC.trash+' حذف</button>' : '') +
       '<button data-copypost="'+pid+'">📋 کپی متن</button>' +
-      '<button data-reportpost="'+pid+'">'+IC.flag+' گزارش</button>' +
+      (isMine ? '' : '<button data-reportpost="'+pid+'">'+IC.flag+' گزارش</button>') +
       '<hr><button data-savepost="'+pid+'">'+(mySaves.includes(p3.id)?'🔖 حذف ذخیره':'🔖 ذخیره')+'</button>';
     $('#contextMenu').style.top = Math.min(rect.bottom+6, window.innerHeight-260)+'px';
     $('#contextMenu').style.left = Math.max(10, rect.left-150)+'px';
@@ -2610,7 +2638,28 @@ document.addEventListener('click', async e => {
     return;
   }
   const ep = t.closest('[data-editpost]'); if(ep){ const p4 = allPosts.find(x => x.id === ep.dataset.editpost); if(p4) openComposer(p4.type||'text', p4); return; }
-  const del = t.closest('[data-delpost]'); if(del){ const id = del.dataset.delpost; confirmAction('حذف پست','این پست حذف شود؟', async () => { try{ await deleteDoc(doc(db,'posts',id)); allPosts = allPosts.filter(p => p.id !== id); if(page==='home') renderHome(); if(page==='profile') renderProfile(); if(page==='gallery') renderGallery(); if(page==='admin') renderAdmin(); toast('حذف شد.','ok'); } catch(err){ toast('خطا: '+err.message,'err'); } }); return; }
+  const del = t.closest('[data-delpost]'); 
+  if(del){ 
+    const id = del.dataset.delpost; 
+    const p5 = allPosts.find(p => p.id === id);
+    confirmAction('حذف پست','این پست حذف شود؟', async () => { 
+      try{ 
+        lastDeleteSnapshot = { post: p5 };
+        await deleteDoc(doc(db,'posts',id)); 
+        allPosts = allPosts.filter(p => p.id !== id); 
+        if(page==='home') renderHome(); 
+        if(page==='profile') renderProfile(); 
+        if(page==='gallery') renderGallery(); 
+        if(page==='admin') renderAdmin(); 
+        showUndoBanner('پست حذف شد.', async () => {
+          if(lastDeleteSnapshot?.post){
+            try{ await setDoc(doc(db,'posts',id), lastDeleteSnapshot.post); allPosts.push(lastDeleteSnapshot.post); if(page==='home') renderHome(); if(page==='profile') renderProfile(); toast('بازگردانی شد.','ok'); }catch{}
+          }
+        });
+      } catch(err){ toast('خطا: '+err.message,'err'); } 
+    }); 
+    return; 
+  }
   const cp = t.closest('[data-copypost]'); if(cp){ const p4 = allPosts.find(x => x.id === cp.dataset.copypost); if(p4 && navigator.clipboard) navigator.clipboard.writeText((p4.title||'')+'\n'+(p4.text||'')).then(()=>toast('کپی شد.','ok')); return; }
   const sp = t.closest('[data-savepost]'); if(sp){ await toggleSave(Number(sp.dataset.savepost)); return; }
   const rp2 = t.closest('[data-reportpost]'); if(rp2){ reportTarget = 'post:' + rp2.dataset.reportpost; openModal('reportModal'); return; }
@@ -2637,7 +2686,6 @@ function setupRealtime(){
       });
       if(page === 'home') renderHome();
       if(hasNew) playBeep();
-      saveOfflineCache();
     }, () => {});
   } catch(err){ console.warn('realtime off', err); }
 }
@@ -2669,7 +2717,7 @@ document.addEventListener('visibilitychange', () => {
 setTimeout(() => {
   $$('[data-longpress]').forEach(el => {
     const pid = el.dataset.longpress;
-    if(pid) setupLongPress(el, pid);
+    if(pid && !el._lpSetup){ el._lpSetup = true; setupLongPress(el, pid); }
   });
 }, 500);
 
